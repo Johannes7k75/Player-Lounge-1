@@ -3,7 +3,7 @@ const client = new Discord.Client({
 	partials: ['MESSAGE', 'CHANNEL', 'USER', 'REACTION'],
 	disableMentions: 'everyone',
 });
-
+console.log('test')
 client.chalk = require('chalk') 
 client.config = require('./config/bot');
 client.commands = new Discord.Collection();

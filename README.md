@@ -1,4 +1,5 @@
-### Hi there 👋
+### Player-Lounge
+is a Discord Bot for the Player-Lounge server
 
 <!--
 **Player-Lounge/Player-Lounge** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -14,6 +15,3 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-ss
-
-s

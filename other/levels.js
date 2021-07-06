@@ -1,10 +1,9 @@
-const config = require('./config/bot');
+const config = require('../config/bot');
 const mongo = require('./mongo');
-const profileSchema = require('./schemas/profile-schema');
-const profileleftSchema = require('./schemas/profile-left-schema');
+const profileSchema = require('../schemas/profile-schema');
 
-module.exports = (client) => {
-	client.on('message', (message) => {
+module.exports = async(client) => {
+	client.on('message', async(message) => {
 		if (message.author.bot || message.channel.type === 'dm') {
 			return;
 		}

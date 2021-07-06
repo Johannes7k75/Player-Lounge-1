@@ -12,6 +12,7 @@
     "canvacord": "^5.2.0",
     "chalk": "^4.1.1",
     "discord.js": "^12.5.3",
+    "ffmpeg-static": "^4.4.0",
     "mongoose": "^5.12.10",
     "mongoose-type-url": "^2.1.0",
     "ms": "^2.1.3",

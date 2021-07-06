@@ -1,4 +1,4 @@
-const mongo = require('../../mongo')
+const mongo = require('../../other/mongo')
 const profileSchema = require('../../schemas/profile-schema')
 const canvacord = require('canvacord')
 const Discord = require('discord.js')

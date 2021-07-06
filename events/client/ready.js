@@ -5,8 +5,8 @@ module.exports = async (client) => {
 	require('../../counters/member-counter')(client)
 	require('../../commands/rr-claim/rr-claim')(client);
 	require('../../commands/moderation/r-regeln')(client);
-	require('../../levels')(client);
-	await require('../../mongo')()
+	require('../../other/levels')(client);
+	await require('../../other/mongo')()
 		.then((mongoose) => {
 			try {
 				console.log('Connected to mongo!');

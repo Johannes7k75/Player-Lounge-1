@@ -14,5 +14,6 @@ client.events = new Discord.Collection();
 ['command_handler', 'event_handler'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client, Discord);
 });
+require('./other/jointocreate')(client)
 
 client.login(client.config.discord.token)

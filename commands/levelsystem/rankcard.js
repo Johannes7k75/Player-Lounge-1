@@ -10,6 +10,8 @@ module.exports = {
     permission: 'everyone',
 
     async execute(client, message, args) {
+        if (message.channel.id != '743865087416074270' && message.channel.id != '733195953170939915' && message.channel.id!='850776264457584650' ) return
+
         if (!args[0]) {
             if (message.attachments.size === 0) {
                 message.channel.send('You dont specified any image URL or attached an image.')

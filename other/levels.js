@@ -69,8 +69,7 @@ const addXP = async (guildId, userId, userName, xpToAdd, message) => {
 				++level;
 				xp -= needed;
 
-				message.reply(`You are now level ${level} with ${xp} experience! You now need ${getNeededXP(level)} XP to level up again.`);
-
+				client.channels.cache.get('743865087416074270').send(`You are now level ${level} with ${xp} experience! You now need ${getNeededXP(level)} XP to level up again.`);
 				await profileSchema.updateOne(
 					{
 						guildId,

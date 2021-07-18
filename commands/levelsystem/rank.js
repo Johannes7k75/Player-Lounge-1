@@ -8,15 +8,18 @@ module.exports = {
     permission: 'everyone',
 
     async execute(client, message, args) {
-        // if (message.channel.id != '743865087416074270') return
+        if (message.channel.id != '743865087416074270' && message.channel.id != '733195953170939915' && message.channel.id!='850776264457584650' ) return
         const Discord = require('discord.js')
         const canvacord = require('canvacord')
-        const mongo = require('../../mongo')
+        const mongo = require('../../other/mongo')
         const profileSchema = require('../../schemas/profile-schema')
 
         await mongo().then(async (mongoose) => {
             try {
                 if (message.mentions.users.size > 0) {
+                    if (message.mentions.users.first().bot === true) {
+                        return message.channel.send('The User you mentioned was to lazzy to write messages!')
+                    }
                     const result = await profileSchema.findOne(
                         {
                             userId: message.mentions.users.first().id

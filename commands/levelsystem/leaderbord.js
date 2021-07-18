@@ -18,6 +18,7 @@ module.exports = {
 
 		// await message.delete();
 		//Grab all of the users in said server
+        if (message.channel.id != '743865087416074270' && message.channel.id != '733195953170939915' && message.channel.id!='850776264457584650' ) return
 		await mongo().then(async (mongoose) => {
 			try {
 				const result = await profileSchema

@@ -1,7 +1,7 @@
 module.exports = {
     name: 'reactionrole-minigame',
     aliases: ['rr-minigame'],
-    description: "Embeds!",
+    description: 'Embeds!',
     async execute(client, message, args) {
         const Discord = require('discord.js');
         const channel = client.config.discord.reactionchannel;
@@ -13,14 +13,13 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor('#D0021B')
             .setTitle('Mini Games')
-            .setDescription('please choose whether you want to receive the Mini Games Channel\n\n'
-                + `${MiniGamesEmoji} : Mini Games`);
+            .setDescription('please choose whether you want to receive the Mini Games Channel\n\n' + `${MiniGamesEmoji} : Mini Games`);
 
         let messageEmbed = await message.channel.send(embed);
         messageEmbed.react(MiniGamesEmoji);
 
         client.on('messageReactionAdd', async (reaction, user) => {
-            console.log('Add')
+            console.log('Add');
             if (reaction.message.partial) await reaction.message.fetch();
             if (reaction.partial) await reaction.fetch();
             if (user.bot) return;
@@ -49,6 +48,5 @@ module.exports = {
                 }
             }
         });
-    }
-
-}       
+    },
+};

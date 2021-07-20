@@ -1,11 +1,10 @@
-
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 require('mongoose-type-url');
 
 const reqString = {
     type: String,
     required: true,
-}
+};
 
 const profileSchema = mongoose.Schema({
     guildId: reqString,
@@ -31,7 +30,7 @@ const profileSchema = mongoose.Schema({
     bgimg: {
         type: mongoose.SchemaTypes.Url,
         required: false,
-    }
-})
+    },
+});
 
-module.exports = mongoose.model('profiles-left', profileSchema)
+module.exports = mongoose.model('profiles-left', profileSchema);

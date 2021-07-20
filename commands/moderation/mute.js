@@ -1,14 +1,15 @@
-const ms = require('ms');
 module.exports = {
-    name: "mute",
+    name: 'mute',
+    aliases: [],
     category: 'moderation',
     utilisation: '{prefix}mute [user]',
-    execute(message, args) {
-        const target = message.mentions.users;
-        if (target) {
 
-            let mainRole = message.guild.roles.cache.find(role => role.name === '??Verifiziert??');
-            let muteRole = message.guild.roles.cache.find(role => role.name === 'mute');
+    execute(client, message, args) {
+        const target = message.mentions.users.first();
+        const ms = require('ms');
+        if (target) {
+            let mainRole = message.guild.roles.cache.find((role) => role.name === '💳Verifiziert💳');
+            let muteRole = message.guild.roles.cache.find((role) => role.name === 'Muted');
 
             let memberTarget = message.guild.members.cache.get(target.id);
 
@@ -16,7 +17,7 @@ module.exports = {
                 memberTarget.roles.remove(mainRole.id);
                 memberTarget.roles.add(muteRole.id);
                 message.channel.send(`<@${memberTarget.user.id}> has been muted`);
-                return
+                return;
             }
             memberTarget.roles.remove(mainRole.id);
             memberTarget.roles.add(muteRole.id);
@@ -29,5 +30,5 @@ module.exports = {
         } else {
             message.channel.send('Cant find that member!');
         }
-    }
-}
+    },
+};

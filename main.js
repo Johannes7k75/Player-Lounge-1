@@ -1,19 +1,17 @@
 const Discord = require('discord.js');
 
-const client = new Discord.Client({	
-    partials: ['MESSAGE', 'CHANNEL', 'USER', 'REACTION'],	
+const client = new Discord.Client({
+    partials: ['MESSAGE', 'CHANNEL', 'USER', 'REACTION'],
     disableMentions: 'everyone',
-}); 
+});
 
-client.chalk = require('chalk') 
+client.chalk = require('chalk');
 client.config = require('./config/bot');
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
-
 ['command_handler', 'event_handler'].forEach((handler) => {
-	require(`./handlers/${handler}`)(client, Discord);
+    require(`./handlers/${handler}`)(client, Discord);
 });
-require('./other/jointocreate')(client)
 
-client.login(client.config.discord.token)
+client.login(client.config.discord.token);

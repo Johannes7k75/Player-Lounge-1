@@ -2,6 +2,7 @@ module.exports = {
 	name: 'clear',
 	aliases: ['c'],
 	category: 'moderation',
+	permissions:['MANAGE_MESSAGES'],
 	utilisation: '{prefix}clear [num]',
 
 	async execute(client, message, args) {

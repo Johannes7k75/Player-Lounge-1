@@ -11,7 +11,7 @@ module.exports = {
 	async execute(client, message, args) {
 		const Discord = require('discord.js');
 		const Util = require('../../node_modules/canvacord/plugins/Util');
-		const mongo = require('../../mongo');
+		const mongo = require('../../other/mongo');
 		const profileSchema = require('../../schemas/profile-schema');
 		var cpage;
 		var rpage;

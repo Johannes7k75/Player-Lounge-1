@@ -6,9 +6,18 @@ module.exports = {
 
     execute(client, message, args) {
         if (!args[0]) {
-            const infos = message.client.commands.filter(x => x.category == 'Infos').map((x) => '`' + x.name + '`').join(', ');
-            const lvlsystem = message.client.commands.filter(x => x.category == 'levelsystem').map((x) => '`' + x.name + '`').join(', ');
-            const moderation = message.client.commands.filter(x => x.category == 'moderation').map((x) => '`' + x.name + '`').join(', ');
+            const infos = message.client.commands
+                .filter((x) => x.category == 'Infos')
+                .map((x) => '`' + x.name + '`')
+                .join(', ');
+            const lvlsystem = message.client.commands
+                .filter((x) => x.category == 'levelsystem')
+                .map((x) => '`' + x.name + '`')
+                .join(', ');
+            const moderation = message.client.commands
+                .filter((x) => x.category == 'moderation')
+                .map((x) => '`' + x.name + '`')
+                .join(', ');
 
             message.channel.send({
                 embed: {
@@ -17,13 +26,13 @@ module.exports = {
                     fields: [
                         { name: 'Bot', value: infos },
                         { name: 'Levelsystem', value: lvlsystem },
-                        { name: 'Moderation', value: moderation }
+                        { name: 'Moderation', value: moderation },
                     ],
                     timestamp: new Date(),
                 },
             });
         } else {
-            const command = message.client.commands.get(args.join(" ").toLowerCase()) || message.client.commands.find(x => x.aliases && x.aliases.includes(args.join(" ").toLowerCase()));
+            const command = message.client.commands.get(args.join(' ').toLowerCase()) || message.client.commands.find((x) => x.aliases && x.aliases.includes(args.join(' ').toLowerCase()));
 
             if (!command) return message.channel.send(`${client.emotes.error} - I did not find this command !`);
 
@@ -39,8 +48,8 @@ module.exports = {
                     ],
                     timestamp: new Date(),
                     description: 'Find information on the command provided.\nMandatory arguments `[]`, optional arguments `<>`.',
-                }
+                },
             });
-        };
+        }
     },
 };

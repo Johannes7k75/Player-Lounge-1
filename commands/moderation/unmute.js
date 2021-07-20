@@ -1,12 +1,13 @@
 module.exports = {
-    name: "unmute",
+    name: 'unmute',
+    aliases: [],
     category: 'moderation',
     utilisation: '{prefix}unmute [user]',
-    execute(message, args) {
+    execute(client, message, args) {
         const target = message.mentions.users.first();
         if (target) {
-            let mainRole = message.guild.roles.cache.find(role => role.name === '??Verifiziert??');
-            let muteRole = message.guild.roles.cache.find(role => role.name === 'mute');
+            let mainRole = message.guild.roles.cache.find((role) => role.name === '💳Verifiziert💳');
+            let muteRole = message.guild.roles.cache.find((role) => role.name === 'Muted');
 
             let memberTarget = message.guild.members.cache.get(target.id);
 
@@ -16,5 +17,5 @@ module.exports = {
         } else {
             message.channel.send('Cant find that member!');
         }
-    }
-}
+    },
+};

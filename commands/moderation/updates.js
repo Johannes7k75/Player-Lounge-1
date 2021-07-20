@@ -3,6 +3,7 @@ module.exports = {
     name: 'updates',
     aliases: ['up'],
     category: 'moderation',
+    permissions: [],
     utilisation: '{prefix}updates',
 
     execute(client, message) {

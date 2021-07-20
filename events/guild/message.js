@@ -1,12 +1,15 @@
 const fs = require('fs');
-module.exports = (client, message, Discord) => {
-    const prefix = client.config.discord.prefix;
+const cooldowns = new Map();
 
-    const args = message.content.slice(client.config.discord.prefix.length).trim().split(/ +/g);
-    if (message.author.bot || message.channel.type === 'dm' || !message.content.startsWith(prefix) || message.content === client.config.discord.prefix) return;
-    const commands = args.shift().toLowerCase();
-    const cmds = client.commands.get(commands) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commands));
-    let teamRole = message.guild.roles.cache.find((r) => r.name === 'Team');
+module.exports = (client, message, Discord) => {
+    const discord = require('discord.js');
+    const prefix = '!';
+    if (message.author.bot || message.channel.type === 'dm' || !message.content.startsWith(prefix) || message.content === prefix) return;
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
+
+    const command = client.commands.get(cmd) || client.commands.find((a) => a.aliases && a.aliases.includes(cmd));
 
     const validPermissions = [
         'CREATE_INSTANT_INVITE',
@@ -41,24 +44,48 @@ module.exports = (client, message, Discord) => {
         'MANAGE_WEBHOOKS',
         'MANAGE_EMOJIS',
     ];
-
-    if (cmds.permissions.length) {
-        let invalidPerms = [];
-        for (const perm of cmds.permissions) {
-            if (!validPermissions.includes(perm)) {
-                return console.log(`Invalid Permissions: ${perm}`);
+    if (command.permissions) {
+        if (command.permissions.length) {
+            let invalidPerms = [];
+            for (const perm of command.permissions) {
+                if (!validPermissions.includes(perm)) {
+                    return console.log(`Invalid Permissions: ${perm}`);
+                }
+                if (!message.member.hasPermission(perm)) {
+                    invalidPerms.push(perm);
+                }
             }
-            if (!message.member.hasPermission(perm)) {
-                invalidPerms.push(perm);
+            if (invalidPerms.length) {
+                return message.channel.send(`Missing Permisssions: \`${invalidPerms}\` `);
             }
-        }
-        if (invalidPerms.length) {
-            return message.channel.send(`Missing Permisssions: \`${invalidPerms}\` `);
         }
     }
 
+    if (!cooldowns.has(command.name)) {
+        cooldowns.set(command.name, new discord.Collection());
+    }
+
+    const current_time = Date.now();
+    const time_stamps = cooldowns.get(command.name);
+    const cooldown_amount = command.cooldown * 1000;
+
+    if (time_stamps.has(message.author.id)) {
+        const expiration_time = time_stamps.get(message.author.id) + cooldown_amount;
+
+        if (current_time < expiration_time) {
+            const time_left = (expiration_time - current_time) / 1000;
+
+            return message.reply(`Please wait ${time_left.toFixed(1)} more seconds before using ${command.name}`);
+        }
+    }
+
+    time_stamps.set(message.author.id, current_time);
+    setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
+
+    let teamRole = message.guild.roles.cache.find((r) => r.name === 'Team');
     if (message.member.roles.cache.has(teamRole.id)) {
-        if (cmds) cmds.execute(client, message, args, Discord);
+        if (command) command.execute(client, message, args, cmd, Discord);
+
         // Loging the who acces team commands
         var stream = fs.createWriteStream('./config/log.txt', { flags: 'a' });
         console.log('write stream');

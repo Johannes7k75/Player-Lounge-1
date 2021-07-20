@@ -6,8 +6,8 @@ module.exports = {
     name: 'rankcard',
     aliases: ['rankc'],
     category: 'levelsystem',
+    permissions: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
     utilisation: '{prefix}rankcard [IMG URL]',
-    permission: 'everyone',
 
     async execute(client, message, args) {
         if (message.channel.id != '743865087416074270' && message.channel.id != '733195953170939915' && message.channel.id != '850776264457584650') return;

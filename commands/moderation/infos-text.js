@@ -3,6 +3,7 @@ module.exports = {
     name: 'infos-text',
     aliases: [],
     category: 'moderation',
+    permissions: [],
     utilisation: '{prefix}infos',
 
     execute(client, message) {

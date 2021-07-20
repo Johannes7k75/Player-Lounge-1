@@ -2,6 +2,7 @@ module.exports = {
     name: 'todo',
     aliases: ['td'],
     category: 'Infos',
+    permissions: [],
     utilisation: '{prefix}todo [priority 1 hightest, 4 lowest] [title] [description]',
 
     execute(client, message, args) {

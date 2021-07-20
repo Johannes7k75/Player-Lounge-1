@@ -3,6 +3,7 @@ module.exports = {
     aliases: [],
     category: 'moderation',
     permissions: ['BAN_MEMBERS'],
+    permissions: [],
     utilisation: '{prefix}unban [ID] <Reason>',
 
     async execute(client, message, args) {

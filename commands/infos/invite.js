@@ -1,7 +1,8 @@
 module.exports = {
     name: 'invite',
-    aliases: [''],
+    aliases: [],
     category: 'infos',
+    permissions: [],
     utilisation: '{prefix}invite',
     permission: 'everyone',
 

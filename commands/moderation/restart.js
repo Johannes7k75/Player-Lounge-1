@@ -5,6 +5,7 @@ module.exports = {
     name: 'restart',
     aliases: ['re'],
     category: 'moderation',
+    permissions: [],
     utilisation: '{prefix}restart [BOT]',
 
     async execute(client, message, args) {

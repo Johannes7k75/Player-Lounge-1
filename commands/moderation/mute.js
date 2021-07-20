@@ -2,6 +2,7 @@ module.exports = {
     name: 'mute',
     aliases: [],
     category: 'moderation',
+    permissions: [],
     utilisation: '{prefix}mute [user]',
 
     execute(client, message, args) {

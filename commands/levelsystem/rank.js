@@ -4,6 +4,7 @@ module.exports = {
     name: 'rank',
     aliases: ['level'],
     category: 'levelsystem',
+    permissions: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
     utilisation: '{prefix}rank',
     permission: 'everyone',
 

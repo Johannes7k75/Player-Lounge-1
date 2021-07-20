@@ -2,6 +2,7 @@ module.exports = {
     name: 'warn',
     aliases: [],
     category: 'moderation',
+    permissions: [],
     utilisation: '{prefix}warn [Mention] [Reason]',
 
     execute(client, message, args) {

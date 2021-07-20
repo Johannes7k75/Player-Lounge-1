@@ -2,6 +2,7 @@ module.exports = {
     name: 'debug',
     aliases: [],
     category: 'Infos',
+    permissions: [],
     utilisation: '{prefix}debug',
 
     execute(client, message) {

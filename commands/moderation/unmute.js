@@ -2,6 +2,7 @@ module.exports = {
     name: 'unmute',
     aliases: [],
     category: 'moderation',
+    permissions: [],
     utilisation: '{prefix}unmute [user]',
     execute(client, message, args) {
         const target = message.mentions.users.first();

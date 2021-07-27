@@ -39,6 +39,9 @@ module.exports = (client) => {
         if (user.id === '743800065650327572') {
             return;
         }
+        console.log(user);
+        reaction.users.remove(user.id);
+
         updateMembers(client);
 
         const emoji = reaction._emoji.name;
@@ -68,12 +71,6 @@ module.exports = (client) => {
     client.on('messageReactionAdd', (reaction, user) => {
         if (reaction.message.channel.id === channelId) {
             handleReaction(reaction, user, true);
-        }
-    });
-
-    client.on('messageReactionRemove', (reaction, user) => {
-        if (reaction.message.channel.id === channelId) {
-            handleReaction(reaction, user, false);
         }
     });
 };

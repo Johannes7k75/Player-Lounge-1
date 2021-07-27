@@ -1,3 +1,5 @@
+const logSchema = require('../../schemas/log-schema');
+const mongo = require('../../other/mongo_local');
 module.exports = {
     name: 'mute',
     aliases: [],
@@ -5,7 +7,7 @@ module.exports = {
     permissions: [],
     utilisation: '{prefix}mute [user]',
 
-    execute(client, message, args) {
+    async execute(client, message, args) {
         const target = message.mentions.users.first();
         const ms = require('ms');
         if (target) {
@@ -20,14 +22,55 @@ module.exports = {
                 message.channel.send(`<@${memberTarget.user.id}> has been muted`);
                 return;
             }
-            memberTarget.roles.remove(mainRole.id);
-            memberTarget.roles.add(muteRole.id);
-            message.channel.send(`<@${memberTarget.user.id}> has been muted for ${ms(ms(args[1]))}`);
 
-            setTimeout(function () {
-                memberTarget.roles.remove(muteRole.id);
-                memberTarget.roles.add(mainRole.id);
-            }, ms(args[1]));
+            user = message.mentions.users.first();
+            reason = args.slice(1).join(' ');
+            date = Math.floor(Date.now() / 1000);
+            guildId = message.guild.id;
+            userId = user.id;
+            userName = user.username;
+            from = message.author.id;
+
+            await mongo().then(async (mongoose) => {
+                try {
+                    console.log('Connected To Mongo Local');
+                    const result = await logSchema.findOneAndUpdate(
+                        {
+                            guildId,
+                            userId,
+                            userName,
+                        },
+                        {
+                            guildId,
+                            userId,
+                            userName,
+                            $push: {
+                                mutes: [
+                                    {
+                                        from,
+                                        reason: reason,
+                                        date: date,
+                                    },
+                                ],
+                            },
+                        },
+                        {
+                            upsert: true,
+                            new: true,
+                        }
+                    );
+                } finally {
+                    mongoose.connection.close();
+                }
+            });
+            // memberTarget.roles.remove(mainRole.id);
+            memberTarget.roles.add(muteRole.id);
+            // message.channel.send(`<@${memberTarget.user.id}> has been muted for ${ms(ms(args[1]))}`);
+
+            // setTimeout(function () {
+            //     memberTarget.roles.remove(muteRole.id);
+            //     // memberTarget.roles.add(mainRole.id);
+            // }, ms(args[1]));
         } else {
             message.channel.send('Cant find that member!');
         }

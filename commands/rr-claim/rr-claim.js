@@ -25,6 +25,7 @@ module.exports = (client) => {
     const CODEmoji = '<:COD:862062378609541180>';
 
     const emojis = {
+        // Emoji: Role
         Apex: 'Apex',
         ARK: 'ARK',
         AU: 'Among Us',
@@ -78,7 +79,7 @@ module.exports = (client) => {
         if (user.id === '743800065650327572') {
             return;
         }
-
+        reaction.users.remove(user.id);
         const emoji = reaction._emoji.name;
 
         const { guild } = reaction.message;
@@ -92,10 +93,10 @@ module.exports = (client) => {
         const spiele = guild.roles.cache.get('775362618675560498');
         const member = guild.members.cache.find((member) => member.id === user.id);
 
-        if (add) {
-            member.roles.add(role).catch(console.log);
-        } else {
+        if (member.roles.cache.has(role.id)) {
             member.roles.remove(role).catch(console.log);
+        } else {
+            member.roles.add(role).catch(console.log);
         }
 
         if (member.roles.cache.some((r) => ['Apex', 'ARK', 'Among Us', 'Battlefront', 'Call of Duty', "Garry's Mod", 'GTA', 'Minecraft', 'Rainbow6Siege', 'Rocket League', 'Satisfactory', 'Space Engineers', 'Watch Dogs'].includes(r.name))) {
@@ -111,11 +112,11 @@ module.exports = (client) => {
         }
     });
 
-    client.on('messageReactionRemove', (reaction, user) => {
-        if (reaction.message.channel.id === channelId) {
-            handleReaction(reaction, user, false);
-        }
-    });
+    // client.on('messageReactionRemove', (reaction, user) => {
+    //     if (reaction.message.channel.id === channelId) {
+    //         handleReaction(reaction, user, false);
+    //     }
+    // });
 };
 
 // process.on('unhandledRejection', error => {

@@ -7,6 +7,7 @@ module.exports = {
         const gamesMessage = '815651928193105980';
         const channel = client.config.discord.reactionchannel;
         const MiniGamesRole = message.guild.roles.cache.get('743858855313801316');
+        // const ApexRole = message.guild.role.cache.find((role) => role.name === 'Apex')
         const ArkRole = message.guild.roles.cache.find((role) => role.name === 'ARK');
         const ArmaRole = message.guild.roles.cache.find((role) => role.name === 'Arma');
         const AmonfUsRole = message.guild.roles.cache.find((role) => role.name === 'Among Us');
@@ -23,6 +24,7 @@ module.exports = {
         const SpaceEngineersRole = message.guild.roles.cache.find((role) => role.name === 'Space Engineers');
         const WatchDogsRole = message.guild.roles.cache.find((role) => role.name === 'Watch Dogs');
 
+        // const ApexEmoji = '<:>'
         const ArkEmoji = '<:ARK:733334992947511337>';
         const ArmaEmoji = '<:ARMA:733336184453070849>';
         const AmongUSEmoji = '<:AU:762334576076783616>';
@@ -46,6 +48,7 @@ module.exports = {
             .setTitle('Games')
             .setDescription(
                 'please choose the games you own\n\n' +
+                    // `${ApexEmoji} : Apex\n` +
                     `${ArkEmoji} : Ark\n` +
                     `${ArmaEmoji} : ARMA\n` +
                     `${AmongUSEmoji} : Among Us\n` +
@@ -65,7 +68,9 @@ module.exports = {
 
         let messageEmbed = await message.channel.send(embed);
 
-        messageEmbed.react(ArkEmoji).catch(console.log);
+        
+        // messageEmbed.react(ApexEmoji).catch(console.log);
+        messageEmbed.react(ArkEmoji);
         messageEmbed.react(ArmaEmoji);
         messageEmbed.react(AmongUSEmoji);
         messageEmbed.react(BattleFrontEmoji);

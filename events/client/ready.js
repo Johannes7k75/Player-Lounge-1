@@ -10,7 +10,16 @@ module.exports = async (client) => {
     await require('../../other/mongo')()
         .then((mongoose) => {
             try {
-                console.log('Connected to mongo!');
+                console.log('Connected to mongo Cloud!');
+            } finally {
+                mongoose.connection.close();
+            }
+        })
+        .catch(console.log);
+    await require('../../other/mongo_local')()
+        .then((mongoose) => {
+            try {
+                console.log('Connected to mongo Local!');
             } finally {
                 mongoose.connection.close();
             }

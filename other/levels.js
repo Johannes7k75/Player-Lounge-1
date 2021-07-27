@@ -11,7 +11,7 @@ module.exports = async (client) => {
         if (message.content.startsWith(config.discord.prefix) || message.content.startsWith('o!') || message.content.startsWith('c!') || message.content.startsWith('t!') || message.member.roles.cache.has(mute.id) || message.author.id === '811946572300156998') return;
         const { guild, member } = message;
         // Math.random() * (max - min) + min) generiert zufallszahl zwischen min und max
-        addXP(guild.id, member.id, member.user.username, Math.round(Math.random() * (20 - 10) + 10), message);
+        addXP(client, guild.id, member.id, member.user.username, Math.round(Math.random() * (20 - 10) + 10), message);
     });
     client.on('guildMemberAdd', (member) => updateStatus(member, true));
     client.on('guildMemberRemove', (member) => updateStatus(member, false));
@@ -38,14 +38,13 @@ const updateStatus = async (member, status) => {
     });
 };
 
-const addXP = async (guildId, userId, userName, xpToAdd, message) => {
+const addXP = async (client, guildId, userId, userName, xpToAdd, message) => {
     await mongo().then(async (mongoose) => {
         try {
             const result = await profileSchema.findOneAndUpdate(
                 {
                     guildId,
                     userId,
-                    userName,
                 },
                 {
                     guildId,
@@ -64,12 +63,12 @@ const addXP = async (guildId, userId, userName, xpToAdd, message) => {
 
             let { xp, level } = result;
             const needed = getNeededXP(level);
-            console.log('Added ' + message.member.user.username + ' ' + xpToAdd + ' level');
+            console.log('Added ' + message.member.user.username + ' ' + xpToAdd + ' XP');
             if (xp >= needed) {
                 ++level;
                 xp -= needed;
 
-                client.channels.cache.get('743865087416074270').send(`You are now level ${level} with ${xp} experience! You now need ${getNeededXP(level)} XP to level up again.`);
+                client.channels.cache.get('743865087416074270').send(`<@!${message.member.id}> You are now level ${level} with ${xp} experience! You now need ${getNeededXP(level)} XP to level up again.`);
                 await profileSchema.updateOne(
                     {
                         guildId,

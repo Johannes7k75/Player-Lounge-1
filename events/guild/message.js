@@ -44,6 +44,9 @@ module.exports = (client, message, Discord) => {
         'MANAGE_WEBHOOKS',
         'MANAGE_EMOJIS',
     ];
+
+    // Permissions system
+    console.log(command.permissions);
     if (command.permissions) {
         if (command.permissions.length) {
             let invalidPerms = [];
@@ -61,10 +64,30 @@ module.exports = (client, message, Discord) => {
         }
     }
 
+    // Role permissions system
+    if (command.role_permissions) {
+        if (command.role_permissions.length) {
+            const { owner, admin, moderator, dev, supporter, team, sklave, streamer_live, nitro_booster, vip, muted, dj, verifiziert } = client.config.rols;
+            const role_permissions = [owner, admin, moderator, dev, supporter, team, sklave, streamer_live, nitro_booster, vip, muted, dj, verifiziert];
+            let invalidPerms = [];
+            for (const perm of command.role_permissions) {
+                if (!role_permissions.includes(perm)) {
+                    return console.log(`Invalid Permission: ${perm[1]}`);
+                }
+                if (!message.member.roles.cache.has(perm[0])) {
+                    invalidPerms.push(perm[1]);
+                }
+            }
+            if (invalidPerms.length) {
+                return message.channel.send(`Missing Role: \`${invalidPerms.join(', ')}\` `);
+            }
+        }
+    }
+
+    // Cooldown manager
     if (!cooldowns.has(command.name)) {
         cooldowns.set(command.name, new discord.Collection());
     }
-
     const current_time = Date.now();
     const time_stamps = cooldowns.get(command.name);
     const cooldown_amount = command.cooldown * 1000;
@@ -74,11 +97,10 @@ module.exports = (client, message, Discord) => {
 
         if (current_time < expiration_time) {
             const time_left = (expiration_time - current_time) / 1000;
-
-            return message.reply(`Please wait ${time_left.toFixed(1)} more seconds before using ${command.name}`);
+            return message.reply(`Please wait ${time_left.toFixed(1)} more seconds before using \`${command.name}\``);
         }
     }
-
+    console.log(time_stamps);
     time_stamps.set(message.author.id, current_time);
     setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
 

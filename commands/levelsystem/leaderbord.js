@@ -115,6 +115,7 @@ module.exports = {
                             }
                         }
                         reaction.message.edit(embedc);
+                        reaction.users.remove(user.id);
                         // reaction.message.edit(embedc);
                     }
                 });

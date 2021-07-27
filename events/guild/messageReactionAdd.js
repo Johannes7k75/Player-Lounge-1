@@ -42,6 +42,7 @@ module.exports = async (client, reaction, user, message) => {
         // console.log(author);
         let embed = new Discord.MessageEmbed().setFooter(status, url).setTitle(title).setDescription(description).setColor(color).setTimestamp(timestamp).setAuthor(author.name, author.iconURL);
         reaction.message.edit(embed);
+        reaction.users.remove(user.id);
     } else {
         return;
     }

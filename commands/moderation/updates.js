@@ -1,24 +1,39 @@
-const Discord = require('discord.js');
 module.exports = {
     name: 'updates',
     aliases: ['up'],
     category: 'moderation',
     permissions: [],
-    utilisation: '{prefix}updates',
+    utilisation: '{prefix}updates [de/en]',
 
-    execute(client, message) {
-        message.delete();
-        embed = new Discord.MessageEmbed().setColor('RANDOM').addFields(
-            {
-                name: 'Kanäle/Rollen',
-                value: ':flag_de: <@&765985461096677457> Wir haben jetzt neue Channel mit den passenden rollen und Benachrichtigungen\n' + 'der offiziellen Servern in der Kategorie |I{•——» GAMES «——•}I| Hinzugefügt. :flag_de:\n\n',
-            },
-            {
-                name: 'Channel/Roll',
-                value: ':flag_gb: <@&765985461096677457> We have now added new channels with the appropriate roles and notifications\n' + ' from the official servers in the category |I{•——» GAMES «——•}I|. :flag_gb:',
-            }
-        );
-
-        message.channel.send(embed);
+    execute(client, message, args) {
+        if (!args[2]) return message.channel.send(`Please enter the content after the title.`).then((msg) => msg.delete({ timeout: 10000 }));
+        if (message.channel.id === '743525218693414992') {
+            message.delete();
+        }
+        if (args[0].toLowerCase() === 'de') {
+            console.log(args);
+            let title = args[1].replace(/\/space/gm, ' ');
+            args.splice(0, 2);
+            message.channel.send({
+                embed: {
+                    fields: {
+                        name: title,
+                        value: `:flag_de: <@&765985461096677457>\n ${args.join(' ')} :flag_de:`,
+                    },
+                },
+            });
+        } else if (args[0].toLowerCase() === 'en') {
+            console.log(args);
+            let title = args[1].replace(/\/space/gm, ' ');
+            args.splice(0, 2);
+            message.channel.send({
+                embed: {
+                    fields: {
+                        name: title,
+                        value: `:flag_gb: <@&765985461096677457>\n ${args.join(' ')} :flag_gb:`,
+                    },
+                },
+            });
+        }
     },
 };

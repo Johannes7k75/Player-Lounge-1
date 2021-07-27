@@ -7,11 +7,12 @@ module.exports = {
         const gamesMessage = '815651928193105980';
         const channel = client.config.discord.reactionchannel;
         const MiniGamesRole = message.guild.roles.cache.get('743858855313801316');
-        // const ApexRole = message.guild.role.cache.find((role) => role.name === 'Apex')
+        const ApexRole = message.guild.roles.cache.find((role) => role.name === 'Apex');
         const ArkRole = message.guild.roles.cache.find((role) => role.name === 'ARK');
         const ArmaRole = message.guild.roles.cache.find((role) => role.name === 'Arma');
         const AmonfUsRole = message.guild.roles.cache.find((role) => role.name === 'Among Us');
         const BattleFrontRole = message.guild.roles.cache.find((role) => role.name === 'Battle Front');
+        const CallofDutyRole = message.guild.roles.cache.find((role) => role.name === 'Call of Duty');
         const CSGORole = message.guild.roles.cache.find((role) => role.name === 'CSGO');
         const ECORole = message.guild.roles.cache.find((role) => role.name === 'Eco');
         const GarrysModRole = message.guild.roles.cache.find((role) => role.name === "Garry's Mod");
@@ -24,11 +25,12 @@ module.exports = {
         const SpaceEngineersRole = message.guild.roles.cache.find((role) => role.name === 'Space Engineers');
         const WatchDogsRole = message.guild.roles.cache.find((role) => role.name === 'Watch Dogs');
 
-        // const ApexEmoji = '<:>'
+        const ApexEmoji = '<:Apex:839890651608645683>';
         const ArkEmoji = '<:ARK:733334992947511337>';
         const ArmaEmoji = '<:ARMA:733336184453070849>';
         const AmongUSEmoji = '<:AU:762334576076783616>';
         const BattleFrontEmoji = '<:Battlefront:801180325958385734>';
+        const CODEmoji = '<:COD:862062378609541180>';
         const CSGOEmoji = '<:CSGO:733336448404553860>';
         const ECOEmoji = '<:ECO:733335069732634816>';
         const GarrysModEmoji = '<:GM:733335087005040650>';
@@ -40,7 +42,7 @@ module.exports = {
         const SatisfactoryEmoji = '<:Satisfactory:801178296129683476>';
         const SpaceEngineersEmoji = '<:SE:725608377454952479>';
         const WatchDogsEmoji = '<:WD:733338295353737387>';
-        const MiniGamesEmoji = '<:viedeogame:806948028795060299>';
+        // const MiniGamesEmoji = '<:viedeogame:806948028795060299>';
 
         message.channel.bulkDelete(1);
         let embed = new Discord.MessageEmbed()
@@ -48,11 +50,12 @@ module.exports = {
             .setTitle('Games')
             .setDescription(
                 'please choose the games you own\n\n' +
-                    // `${ApexEmoji} : Apex\n` +
+                    `${ApexEmoji} : Apex\n` +
                     `${ArkEmoji} : Ark\n` +
                     `${ArmaEmoji} : ARMA\n` +
                     `${AmongUSEmoji} : Among Us\n` +
                     `${BattleFrontEmoji} : Battle Front\n` +
+                    `${CODEmoji} : Call of Duty\n` +
                     `${CSGOEmoji} : CSGO\n` +
                     `${ECOEmoji} : ECO\n` +
                     `${GarrysModEmoji} : Garry's Mod\n` +
@@ -69,11 +72,12 @@ module.exports = {
         let messageEmbed = await message.channel.send(embed);
 
         
-        // messageEmbed.react(ApexEmoji).catch(console.log);
+        messageEmbed.react(ApexEmoji).catch(console.log);
         messageEmbed.react(ArkEmoji);
         messageEmbed.react(ArmaEmoji);
         messageEmbed.react(AmongUSEmoji);
         messageEmbed.react(BattleFrontEmoji);
+        messageEmbed.react(CODEmoji);
         messageEmbed.react(CSGOEmoji);
         messageEmbed.react(ECOEmoji);
         messageEmbed.react(GarrysModEmoji);
@@ -85,7 +89,7 @@ module.exports = {
         messageEmbed.react(SatisfactoryEmoji);
         messageEmbed.react(SpaceEngineersEmoji);
         messageEmbed.react(WatchDogsEmoji);
-        messageEmbed.react(MiniGamesEmoji);
+        // messageEmbed.react(MiniGamesEmoji);
 
         client.on('messageReactionAdd', async (reaction, user) => {
             if (reaction.message.partial) await reaction.message.fetch();
@@ -94,9 +98,11 @@ module.exports = {
             if (!reaction.message.guild) return;
 
             if (reaction.message.channel.id === channel && reaction.message.id === gamesMessage) {
+                if (reaction.emoji.name === 'Apex') {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(ApexRole).catch(console.error);
+                }
                 if (reaction.emoji.name === 'ARK') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(ArkRole).catch(console.error);
-                    console.log('Role Ark');
                 }
                 if (reaction.emoji.name === 'ARMA') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(ArmaRole).catch(console.error);
@@ -106,6 +112,9 @@ module.exports = {
                 }
                 if (reaction.emoji.name === 'Battle Front') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(BattleFrontRole).catch(console.error);
+                }
+                if (reaction.emoji.name === 'Call of Duty') {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(CallofDutyRole).catch(console.error);
                 }
                 if (reaction.emoji.name === 'CSGO') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(CSGORole).catch(console.error);
@@ -140,9 +149,9 @@ module.exports = {
                 if (reaction.emoji.name === 'WD') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(WatchDogsRole).catch(console.error);
                 }
-                if (reaction.emoji.name === 'viedeogame') {
-                    await reaction.message.guild.members.cache.get(user.id).roles.add(MiniGamesRole).catch(console.error);
-                }
+                // if (reaction.emoji.name === 'viedeogame') {
+                //     await reaction.message.guild.members.cache.get(user.id).roles.add(MiniGamesRole).catch(console.error);
+                // }
             } else {
                 return;
             }

@@ -34,11 +34,10 @@ module.exports = {
             await mongo().then(async (mongoose) => {
                 try {
                     console.log('Connected To Mongo Local');
-                    const result = await logSchema.findOneAndUpdate(
+                    await logSchema.findOneAndUpdate(
                         {
                             guildId,
                             userId,
-                            userName,
                         },
                         {
                             guildId,
@@ -50,6 +49,7 @@ module.exports = {
                                         from,
                                         reason: reason,
                                         date: date,
+                                        removed: false,
                                     },
                                 ],
                             },
@@ -65,12 +65,12 @@ module.exports = {
             });
             // memberTarget.roles.remove(mainRole.id);
             memberTarget.roles.add(muteRole.id);
-            // message.channel.send(`<@${memberTarget.user.id}> has been muted for ${ms(ms(args[1]))}`);
+            message.channel.send(`<@${memberTarget.user.id}> has been muted for ${ms(ms(args[1]))}`);
 
-            // setTimeout(function () {
-            //     memberTarget.roles.remove(muteRole.id);
-            //     // memberTarget.roles.add(mainRole.id);
-            // }, ms(args[1]));
+            setTimeout(function () {
+                memberTarget.roles.remove(muteRole.id);
+                // memberTarget.roles.add(mainRole.id);
+            }, ms(args[1]));
         } else {
             message.channel.send('Cant find that member!');
         }

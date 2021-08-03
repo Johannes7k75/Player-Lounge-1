@@ -5,7 +5,7 @@ module.exports = {
     permissions: ['BAN_MEMBERS'],
     utilisation: '{prefix}ban [Mention] [Reason]',
 
-    execute(client, message, args) {
+    async execute(client, message, args) {
         if (!message.guild) return;
         if (!args[1]) return message.reply('Specify a reson');
         reason = args.slice(1).join(' ');
@@ -17,6 +17,49 @@ module.exports = {
         if (user) {
             const member = message.guild.member(user);
             if (member) {
+                if (message.mentions.users.size > 0) {
+                    user = message.mentions.users.first();
+                    reason = args.slice(1).join(' ');
+                    date = Math.floor(Date.now() / 1000);
+
+                    guildId = message.guild.id;
+                    userId = user.id;
+                    userName = user.username;
+                    from = message.author.id;
+                    console.log(guildId, userId, userName);
+                    await mongo().then(async (mongoose) => {
+                        try {
+                            console.log('Connected To Mongo Local');
+                            await logSchema.findOneAndUpdate(
+                                {
+                                    guildId,
+                                    userId,
+                                },
+                                {
+                                    guildId,
+                                    userId,
+                                    userName,
+                                    $push: {
+                                        banishes: [
+                                            {
+                                                from,
+                                                reason: reason,
+                                                date: date,
+                                                removed: false,
+                                            },
+                                        ],
+                                    },
+                                },
+                                {
+                                    upsert: true,
+                                    new: true,
+                                }
+                            );
+                        } finally {
+                            mongoose.connection.close();
+                        }
+                    });
+                }
                 member
                     .ban({ reason: reason })
                     .then(() => {

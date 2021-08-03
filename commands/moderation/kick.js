@@ -5,7 +5,7 @@ module.exports = {
     permissions: ['KICK_MEMBERS'],
     utilisation: '{prefix}kick [Mention] [Reason]',
 
-    execute(client, message, args) {
+    async execute(client, message, args) {
         if (!message.guild) return;
         if (!args[1]) return message.reply('Specify a reson');
         if (message.mentions.users.size > 0) {
@@ -17,6 +17,48 @@ module.exports = {
         if (user) {
             const member = message.guild.member(user);
             if (member) {
+                if (message.mentions.users.size > 0) {
+                    user = message.mentions.users.first();
+                    reason = args.slice(1).join(' ');
+                    date = Math.floor(Date.now() / 1000);
+
+                    guildId = message.guild.id;
+                    userId = user.id;
+                    userName = user.username;
+                    from = message.author.id;
+                    console.log(guildId, userId, userName);
+                    await mongo().then(async (mongoose) => {
+                        try {
+                            console.log('Connected To Mongo Local');
+                            await logSchema.findOneAndUpdate(
+                                {
+                                    guildId,
+                                    userId,
+                                },
+                                {
+                                    guildId,
+                                    userId,
+                                    userName,
+                                    $push: {
+                                        kicks: [
+                                            {
+                                                from,
+                                                reason: reason,
+                                                date: date,
+                                            },
+                                        ],
+                                    },
+                                },
+                                {
+                                    upsert: true,
+                                    new: true,
+                                }
+                            );
+                        } finally {
+                            mongoose.connection.close();
+                        }
+                    });
+                }
                 member
                     .kick(reason)
                     .then(() => {

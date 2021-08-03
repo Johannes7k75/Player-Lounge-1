@@ -9,9 +9,12 @@ module.exports = (client) => {
 
     const getEmoji = (emojiName) => client.emojis.cache.find((emoji) => emoji.name === emojiName);
 
+    const ApexEmoji = '<:Apex:839890651608645683>';
     const ArkEmoji = '<:ARK:733334992947511337>';
     const AmongUSEmoji = '<:AU:762334576076783616>';
     const BattleFrontEmoji = '<:Battlefront:801180325958385734>';
+    const CSGOEmoji = '<:CSGO:733336448404553860>';
+    const CODEmoji = '<:COD:862062378609541180>';
     const ECOEmoji = '<:ECO:733335069732634816>';
     const GarrysModEmoji = '<:GM:733335087005040650>';
     const GTAEmoji = '<:GTA:733335887152283769>';
@@ -21,8 +24,6 @@ module.exports = (client) => {
     const SatisfactoryEmoji = '<:Satisfactory:801178296129683476>';
     const SpaceEngineersEmoji = '<:SE:725608377454952479>';
     const WatchDogsEmoji = '<:WD:733338295353737387>';
-    const ApexEmoji = '<:Apex:839890651608645683>';
-    const CODEmoji = '<:COD:862062378609541180>';
 
     const emojis = {
         // Emoji: Role
@@ -30,6 +31,7 @@ module.exports = (client) => {
         ARK: 'ARK',
         AU: 'Among Us',
         Battlefront: 'Battlefront',
+        CSGO: 'CSGO',
         COD: 'Call of Duty',
         ECO: 'Eco',
         GM: "Garry's Mod",
@@ -56,9 +58,12 @@ module.exports = (client) => {
             .setColor('#ff0000')
             .setDescription(
                 'Please choose the games you own\n\n' +
+                    `${ApexEmoji} : Apex\n` +
                     `${ArkEmoji} : Ark\n` +
                     `${AmongUSEmoji} : Among Us\n` +
                     `${BattleFrontEmoji} : Battle Front\n` +
+                    `${CSGOEmoji} : CSGO\n` +
+                    `${CODEmoji} : Call of Duty\n` +
                     `${ECOEmoji} : Eco\n` +
                     `${GarrysModEmoji} : Garry's Mod\n` +
                     `${GTAEmoji} : GTA V\n` +
@@ -67,9 +72,7 @@ module.exports = (client) => {
                     `${RocketLeagueEmoji} : Rocket League\n` +
                     `${SatisfactoryEmoji} : Satisfactory\n` +
                     `${SpaceEngineersEmoji} : Space Engineers\n` +
-                    `${WatchDogsEmoji} : Watch Dogs\n` +
-                    `${ApexEmoji} : Apex\n` +
-                    `${CODEmoji} : Call of Duty\n\n`
+                    `${WatchDogsEmoji} : Watch Dogs\n\n`
             );
     }
     // `Would you like to have little Minigames to play them react with ${MiniGamesEmoji}`

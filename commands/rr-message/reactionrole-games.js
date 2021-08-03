@@ -6,7 +6,7 @@ module.exports = {
         const Discord = require('discord.js');
         const gamesMessage = '815651928193105980';
         const channel = client.config.discord.reactionchannel;
-        const MiniGamesRole = message.guild.roles.cache.get('743858855313801316');
+        // const MiniGamesRole = message.guild.roles.cache.get('743858855313801316');
         const ApexRole = message.guild.roles.cache.find((role) => role.name === 'Apex');
         const ArkRole = message.guild.roles.cache.find((role) => role.name === 'ARK');
         const ArmaRole = message.guild.roles.cache.find((role) => role.name === 'Arma');
@@ -17,7 +17,7 @@ module.exports = {
         const ECORole = message.guild.roles.cache.find((role) => role.name === 'Eco');
         const GarrysModRole = message.guild.roles.cache.find((role) => role.name === "Garry's Mod");
         const GTARole = message.guild.roles.cache.find((role) => role.name === 'GTA V');
-        const LOLRole = message.guild.roles.cache.find((role) => role.name === 'LOL');
+        // const LOLRole = message.guild.roles.cache.find((role) => role.name === 'LOL');
         const MinecraftRole = message.guild.roles.cache.find((role) => role.name === 'Minecraft');
         const Rainbow6SiegeRole = message.guild.roles.cache.find((role) => role.name === 'Rainbow6Siege');
         const RocketLeagueRole = message.guild.roles.cache.find((role) => role.name === 'Rocket League');
@@ -35,7 +35,7 @@ module.exports = {
         const ECOEmoji = '<:ECO:733335069732634816>';
         const GarrysModEmoji = '<:GM:733335087005040650>';
         const GTAEmoji = '<:GTA:733335887152283769>';
-        const LOLEmoji = '<:LOL:733335119255044148>';
+        // const LOLEmoji = '<:LOL:733335119255044148>';
         const MinecraftEmoji = '<:MC:733335137298939935>';
         const Rainbow6SiegeEmoji = '<:R6S:733335151060451348>';
         const RocketLeagueEmoji = '<:RL:760926585179865129>';
@@ -60,7 +60,7 @@ module.exports = {
                     `${ECOEmoji} : ECO\n` +
                     `${GarrysModEmoji} : Garry's Mod\n` +
                     `${GTAEmoji} : GTA V\n` +
-                    `${LOLEmoji} : LOL\n` +
+                    // `${LOLEmoji} : LOL\n` +
                     `${MinecraftEmoji} : Minecraft\n` +
                     `${Rainbow6SiegeEmoji} : Rainbow Six Siege\n` +
                     `${RocketLeagueEmoji} : Rocket League\n` +
@@ -82,7 +82,7 @@ module.exports = {
         messageEmbed.react(ECOEmoji);
         messageEmbed.react(GarrysModEmoji);
         messageEmbed.react(GTAEmoji);
-        messageEmbed.react(LOLEmoji);
+        // messageEmbed.react(LOLEmoji);
         messageEmbed.react(MinecraftEmoji);
         messageEmbed.react(Rainbow6SiegeEmoji);
         messageEmbed.react(RocketLeagueEmoji);
@@ -128,9 +128,9 @@ module.exports = {
                 if (reaction.emoji.name === 'GTA') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(GTARole).catch(console.error);
                 }
-                if (reaction.emoji.name === 'LOL') {
-                    await reaction.message.guild.members.cache.get(user.id).roles.add(LOLRole).catch(console.error);
-                }
+                // if (reaction.emoji.name === 'LOL') {
+                //     await reaction.message.guild.members.cache.get(user.id).roles.add(LOLRole).catch(console.error);
+                // }
                 if (reaction.emoji.name === 'MC') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(MinecraftRole).catch(console.error);
                 }
@@ -164,6 +164,9 @@ module.exports = {
             if (!reaction.message.guild) return;
 
             if (reaction.message.channel.id === channel) {
+                if (reaction.emoji.name === 'Apex') {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(ApexRole).catch(console.error);
+                }
                 if (reaction.emoji.name === 'ARK') {
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(ArkRole).catch(console.error);
                 }
@@ -188,9 +191,9 @@ module.exports = {
                 if (reaction.emoji.name === 'GTA') {
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(GTARole).catch(console.error);
                 }
-                if (reaction.emoji.name === 'LOL') {
-                    await reaction.message.guild.members.cache.get(user.id).roles.remove(LOLRole).catch(console.error);
-                }
+                // if (reaction.emoji.name === 'LOL') {
+                //     await reaction.message.guild.members.cache.get(user.id).roles.remove(LOLRole).catch(console.error);
+                // }
                 if (reaction.emoji.name === 'MC') {
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(MinecraftRole).catch(console.error);
                 }
@@ -209,9 +212,9 @@ module.exports = {
                 if (reaction.emoji.name === 'WD') {
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(WatchDogsRole).catch(console.error);
                 }
-                if (reaction.emoji.name === 'viedeogame') {
-                    await reaction.message.guild.members.cache.get(user.id).roles.remove(MiniGamesRole).catch(console.error);
-                }
+                // if (reaction.emoji.name === 'viedeogame') {
+                //     await reaction.message.guild.members.cache.get(user.id).roles.remove(MiniGamesRole).catch(console.error);
+                // }
             } else {
                 return;
             }

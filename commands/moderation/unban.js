@@ -11,6 +11,42 @@ module.exports = {
         // const user = message.mentions.users.first();
         console.log(typeof args[0]);
         const user = await message.guild.members.unban(args[0]);
+        if (message.mentions.users.size > 0) {
+            user = message.mentions.users.first();
+            reason = args.slice(1).join(' ');
+            date = Math.floor(Date.now() / 1000);
+
+            guildId = message.guild.id;
+            userId = user.id;
+            userName = user.username;
+            from = message.author.id;
+            console.log(guildId, userId, userName);
+            await mongo().then(async (mongoose) => {
+                try {
+                    console.log('Connected To Mongo Local');
+                    await logSchema.findOneAndUpdate(
+                        {
+                            guildId,
+                            userId,
+                        },
+                        {
+                            guildId,
+                            userId,
+                            userName,
+                            $push: {
+                                banishes: [
+                                    {
+                                        removed: true,
+                                    },
+                                ],
+                            },
+                        }
+                    );
+                } finally {
+                    mongoose.connection.close();
+                }
+            });
+        }
         if (args.length >= 2) {
             reason = args.slice(1).join(' ');
         } else {

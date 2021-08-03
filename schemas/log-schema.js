@@ -14,6 +14,7 @@ const banSchema = mongoose.Schema({
     from: nonreqNum,
     reason: nonreqString,
     date: nonreqString,
+    removed: nonreqString,
 });
 
 const warnSchema = mongoose.Schema({
@@ -26,6 +27,7 @@ const muteSchema = mongoose.Schema({
     from: nonreqNum,
     reason: nonreqString,
     date: nonreqString,
+    removed: nonreqString,
 });
 
 const logSchema = mongoose.Schema({

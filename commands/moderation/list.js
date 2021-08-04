@@ -1,5 +1,3 @@
-const lists = require('../../other/lists');
-
 module.exports = {
     name: 'list',
     aliases: [],
@@ -38,9 +36,14 @@ module.exports = {
         // List all lists
         if (!args[0]) {
             var embed = new Discord.MessageEmbed().setTitle('Lists');
-            console.log(list_file.lists.length);
+            var EinträgeLen;
             for (i = 0; i < list_file.lists.length; i++) {
-                embed.addFields({ name: `${i + 1}. ${list_file.lists[i].name}`, value: `Einträge: \`${list_file.lists[i].fields.length}\`` }).setFooter('List');
+                if (list_file.lists[i].fields === undefined) {
+                    EinträgeLen = 0;
+                } else {
+                    EinträgeLen = list_file.lists[i].fields.length;
+                }
+                embed.addFields({ name: `${i + 1}. ${list_file.lists[i].name}`, value: `Einträge: \`${EinträgeLen}\`` }).setFooter('List');
             }
             const filter = (reaction, user) => reaction.emoji.name === '🗑️' && user.bot != true; //;
             const embedmessage = await message.channel.send(embed);
@@ -80,7 +83,7 @@ module.exports = {
                 list_file.lists[args[0] - 1].fields.splice(index, 1);
                 var stream = fs.createWriteStream(`other/lists.js`, { flags: 'w' });
                 stream.write(`module.exports = ` + JSON.stringify(list_file, null, '\t'));
-                commandFeedback('remove', list_name, field_name);
+                cmdFeedback('remove', list_name, field_name);
             }
         }
         // Delete a list
@@ -91,7 +94,7 @@ module.exports = {
                 list_file.lists.splice(index, 1);
                 var stream = fs.createWriteStream(`other/lists.js`, { flags: 'w' });
                 stream.write(`module.exports = ` + JSON.stringify(list_file, null, '\t'));
-                commandFeedback('delete', list_name);
+                cmdFeedback('delete', list_name);
             } else {
                 message.channel.send(`No list found with that numnber \`${args[1]}\` `);
             }
@@ -99,10 +102,10 @@ module.exports = {
         }
         // Create a list
         if (args[0] === 'create') {
-            list_file.lists.push({ name: args.slice(1).join(' ') });
+            list_file.lists.push({ name: args.slice(1).join(' '), fields: [] });
             var stream = fs.createWriteStream(`other/lists.js`, { flags: 'w' });
             stream.write(`module.exports = ` + JSON.stringify(list_file, null, '\t'));
-            commandFeedback('create', args.slice(1));
+            cmdFeedback('create', args.slice(1).join(' '));
             return;
         }
     },

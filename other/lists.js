@@ -1,3 +1,8 @@
 module.exports = {
-    lists: [],
-};
+	"lists": [
+		{
+			"name": "Minecraft User",
+			"fields": []
+		}
+	]
+}

@@ -46,7 +46,6 @@ module.exports = (client, message, Discord) => {
     ];
 
     // Permissions system
-    console.log(command.permissions);
     if (command.permissions) {
         if (command.permissions.length) {
             let invalidPerms = [];
@@ -100,7 +99,6 @@ module.exports = (client, message, Discord) => {
             return message.reply(`Please wait ${time_left.toFixed(1)} more seconds before using \`${command.name}\``);
         }
     }
-    console.log(time_stamps);
     time_stamps.set(message.author.id, current_time);
     setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
 
@@ -110,7 +108,6 @@ module.exports = (client, message, Discord) => {
 
         // Loging the who acces team commands
         var stream = fs.createWriteStream('./config/log.txt', { flags: 'a' });
-        console.log('write stream');
         stream.write(message.author.username + '[' + 'Author.ID:' + message.author.id + '|' + 'Server:' + message.guild.name + ']' + ': ' + '"' + message.content + '"' + ' ' + new Date() + '\n');
     } else if (cmds.permission === 'everyone') {
         if (cmds) cmds.execute(client, message, args, Discord);

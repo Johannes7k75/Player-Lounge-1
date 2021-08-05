@@ -1,8 +1,10 @@
+const { rols } = require('../../config/bot');
 module.exports = {
     name: 'list',
     aliases: [],
     category: 'moderation',
     permissions: [],
+    role_permissions: [rols.team],
     utilisation: '{prefix}list',
 
     async execute(client, message, args) {
@@ -35,6 +37,9 @@ module.exports = {
 
         // List all lists
         if (!args[0]) {
+            if (!message.member.roles.cache.has(rols.team[0])) {
+                return;
+            }
             var embed = new Discord.MessageEmbed().setTitle('Lists');
             var EinträgeLen;
             for (i = 0; i < list_file.lists.length; i++) {
@@ -51,6 +56,9 @@ module.exports = {
             embedmessage.awaitReactions(filter, { max: 1 }).then((collected) => collected.first().message.delete());
             return;
         } else if (args[0] && !args[1]) {
+            if (!message.member.roles.cache.has(rols.team[0])) {
+                return;
+            }
             var embed = new Discord.MessageEmbed().setTitle(`${list_file.lists[args[0] - 1].name}`);
             description = [];
             for (i = 0; i < list_file.lists[args[0] - 1].fields.length; i++) {
@@ -67,6 +75,10 @@ module.exports = {
         }
         // Add a field to a list
         if (args[1] === 'add') {
+            if (!message.member.roles.cache.some((r) => [rols.supporter[0], rols.cosupporter[0], rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
+                message.channel.send(`You don't have the role: \`Supporter\` or higher`).then((msg) => msg.delete({ timeout: list.countdown }));
+                return;
+            }
             list_file.lists[args[0] - 1].fields.push(args.slice(2).join(' '));
             var stream = fs.createWriteStream(`other/lists.js`, { flags: 'w' });
             stream.write(`module.exports = ` + JSON.stringify(list_file, null, '\t'));
@@ -76,6 +88,10 @@ module.exports = {
         }
         // Remove a field from a list
         if (args[1] === 'remove') {
+            if (!message.member.roles.cache.some((r) => [rols.supporter[0], rols.cosupporter[0], rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
+                message.channel.send(`You don't have the role: \`Supporter\` or higher`).then((msg) => msg.delete({ timeout: list.countdown }));
+                return;
+            }
             const index = list_file.lists[args[0] - 1].fields.indexOf(list_file.lists[args[0] - 1].fields[args[2] - 1]);
             if (index > -1) {
                 const field_name = list_file.lists[args[0] - 1].fields[args[2] - 1];
@@ -88,6 +104,10 @@ module.exports = {
         }
         // Delete a list
         if (args[0] === 'delete') {
+            if (!message.member.roles.cache.some((r) => [rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
+                message.channel.send(`You don't have the role: \`Moderator\` or higher`).then((msg) => msg.delete({ timeout: list.countdown }));
+                return;
+            }
             const index = list_file.lists.indexOf(list_file.lists[args[1] - 1]);
             if (index > -1) {
                 const list_name = list_file.lists[args[1] - 1].name;
@@ -102,6 +122,10 @@ module.exports = {
         }
         // Create a list
         if (args[0] === 'create') {
+            if (!message.member.roles.cache.some((r) => [rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
+                message.channel.send(`You don't have the role: \`Moderator\` or higher`).then((msg) => msg.delete({ timeout: list.countdown }));
+                return;
+            }
             list_file.lists.push({ name: args.slice(1).join(' '), fields: [] });
             var stream = fs.createWriteStream(`other/lists.js`, { flags: 'w' });
             stream.write(`module.exports = ` + JSON.stringify(list_file, null, '\t'));

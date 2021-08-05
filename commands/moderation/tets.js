@@ -7,6 +7,7 @@ module.exports = {
     utilisation: '{prefix}test',
 
     execute(client, message, args) {
+        message.channel.send(args.join(' ').replace('_', '\_'));
         // message.delete();
         // message.channel.send(`<t:${Math.floor(Date.now() / 1000)}:R>`);
         // message.channel.send(`${Math.floor(Date.now())}`);

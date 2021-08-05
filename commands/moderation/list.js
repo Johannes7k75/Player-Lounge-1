@@ -56,7 +56,7 @@ module.exports = {
             for (i = 0; i < list_file.lists[args[0] - 1].fields.length; i++) {
                 description.push(`${i + 1}. ${list_file.lists[args[0] - 1].fields[i]}`);
             }
-            embed.setDescription(description.join('\n')).setFooter('List');
+            embed.setDescription(`\`\`\`${description.join('\n')}\`\`\``).setFooter('List');
             const filter = (reaction, user) => reaction.emoji.name === '🗑️' && user.bot != true; //;
 
             embedmessage = await message.channel.send(embed);

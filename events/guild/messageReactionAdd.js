@@ -30,7 +30,8 @@ module.exports = async (client, reaction, user, message) => {
         }
         if (reaction_name === '❔') {
             url = 'https://images.emojiterra.com/twitter/v13.0/512px/2754.png';
-            status = 'question';
+            status = 'question/status';
+            client.channels.cache.get('850776264457584650').send({ embed: { description: `<@&844206736197550100>\nBei [Nachricht](${reaction.message.url}) gibt es eine frage oder Status wird gefordert.\nUser: ${user.username}#${user.discriminator}\nID: ${user.id}` } });
         }
 
         const { title, description, color, timestamp, author } = reaction.message.embeds[0];

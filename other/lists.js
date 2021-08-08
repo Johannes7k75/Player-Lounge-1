@@ -18,6 +18,13 @@ module.exports = {
 				"Kahrmii",
 				"LordAlpha_"
 			]
+		},
+		{
+			"name": "Linux Befehle",
+			"fields": [
+				"lsusb - listet alle Usb-Ports auf",
+				"htop - linux taskmanager in console"
+			]
 		}
 	]
 }

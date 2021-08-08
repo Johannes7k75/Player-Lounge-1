@@ -75,7 +75,7 @@ module.exports = {
         }
         // Add a field to a list
         if (args[1] === 'add') {
-            if (!message.member.roles.cache.some((r) => [rols.supporter[0], rols.cosupporter[0], rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
+            if (!message.member.roles.cache.some((r) => [rols.supporter[0], rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
                 message.channel.send(`You don't have the role: \`Supporter\` or higher`).then((msg) => msg.delete({ timeout: list.countdown }));
                 return;
             }
@@ -88,7 +88,7 @@ module.exports = {
         }
         // Remove a field from a list
         if (args[1] === 'remove') {
-            if (!message.member.roles.cache.some((r) => [rols.supporter[0], rols.cosupporter[0], rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
+            if (!message.member.roles.cache.some((r) => [rols.supporter[0], rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
                 message.channel.send(`You don't have the role: \`Supporter\` or higher`).then((msg) => msg.delete({ timeout: list.countdown }));
                 return;
             }
@@ -103,20 +103,20 @@ module.exports = {
             }
         }
         // Delete a list
-        if (args[0] === 'delete') {
+        if (args[1] === 'delete') {
             if (!message.member.roles.cache.some((r) => [rols.moderator[0], rols.admin[0], rols.owner[0]].includes(r.id))) {
                 message.channel.send(`You don't have the role: \`Moderator\` or higher`).then((msg) => msg.delete({ timeout: list.countdown }));
                 return;
             }
-            const index = list_file.lists.indexOf(list_file.lists[args[1] - 1]);
+            const index = list_file.lists.indexOf(list_file.lists[args[0] - 1]);
             if (index > -1) {
-                const list_name = list_file.lists[args[1] - 1].name;
+                const list_name = list_file.lists[args[0] - 1].name;
                 list_file.lists.splice(index, 1);
                 var stream = fs.createWriteStream(`other/lists.js`, { flags: 'w' });
                 stream.write(`module.exports = ` + JSON.stringify(list_file, null, '\t'));
                 cmdFeedback('delete', list_name);
             } else {
-                message.channel.send(`No list found with that numnber \`${args[1]}\` `);
+                message.channel.send(`No list found with that numnber \`${args[0]}\` `);
             }
             return;
         }

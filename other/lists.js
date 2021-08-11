@@ -23,7 +23,21 @@ module.exports = {
 			"name": "Linux Befehle",
 			"fields": [
 				"lsusb - listet alle Usb-Ports auf",
-				"htop - linux taskmanager in console"
+				"htop - linux taskmanager in console",
+				"pwd - Zeigt Pfad an wo man gerade ist",
+				"bash führt aus so wie ./ aber sie führen nicht auf der selben art und weise gleich aus"
+			]
+		},
+		{
+			"name": "Discord Funktionen",
+			"fields": [
+				"mit \\_ kann man zwei unterstiche benutzen"
+			]
+		},
+		{
+			"name": "docker",
+			"fields": [
+				"docker ps - zeigt alle aktiven Sitzungen an"
 			]
 		}
 	]

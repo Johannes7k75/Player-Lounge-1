@@ -1,7 +1,7 @@
 module.exports = {
     name: 'help',
     aliases: ['h'],
-    category: 'Core',
+    category: 'Infos',
     permissions: [],
     utilisation: '{prefix}help <command name>',
 
@@ -25,7 +25,7 @@ module.exports = {
                     color: 'ORANGE',
                     author: { name: 'Help pannel' },
                     fields: [
-                        { name: 'Bot', value: infos },
+                        { name: 'Infos', value: infos },
                         { name: 'Levelsystem', value: lvlsystem },
                         { name: 'Moderation', value: moderation },
                     ],

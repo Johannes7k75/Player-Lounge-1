@@ -26,7 +26,9 @@ module.exports = (client) => {
         '<Chat>\n' +
         'Kein spam und keine sinnlosen @ Erwähnungen.\n\n' +
         '<Discord-TOS>\n' +
-        'Halte dich an die generellen TOS von Discord' +
+        'Halte dich an die generellen TOS von Discord\n\n' +
+        '<Accounts>\n' +
+        'Zweit Accounts sind auf diesem server nicht erlaubt' +
         '```';
     for (const key in emojis) {
         const emoji = getEmoji(key);

@@ -23,6 +23,7 @@ module.exports = {
         const RocketLeagueRole = message.guild.roles.cache.find((role) => role.name === 'Rocket League');
         const SatisfactoryRole = message.guild.roles.cache.find((role) => role.name === 'Satisfactory');
         const SpaceEngineersRole = message.guild.roles.cache.find((role) => role.name === 'Space Engineers');
+        const StarbaseRole = message.guild.roles.cache.find((role) => role.name === 'Starbase');
         const WatchDogsRole = message.guild.roles.cache.find((role) => role.name === 'Watch Dogs');
 
         const ApexEmoji = '<:Apex:839890651608645683>';
@@ -41,6 +42,7 @@ module.exports = {
         const RocketLeagueEmoji = '<:RL:760926585179865129>';
         const SatisfactoryEmoji = '<:Satisfactory:801178296129683476>';
         const SpaceEngineersEmoji = '<:SE:725608377454952479>';
+        const StarbaseEmoji = '<:starbase:875814526451351552>';
         const WatchDogsEmoji = '<:WD:733338295353737387>';
         // const MiniGamesEmoji = '<:viedeogame:806948028795060299>';
 
@@ -66,6 +68,7 @@ module.exports = {
                     `${RocketLeagueEmoji} : Rocket League\n` +
                     `${SatisfactoryEmoji} : Satisfactory\n` +
                     `${SpaceEngineersEmoji} : Space Engineers\n` +
+                    `${StarbaseEmoji} : Starbase\n` +
                     `${WatchDogsEmoji} : Watch Dogs\n\n`
             );
 
@@ -88,6 +91,7 @@ module.exports = {
         messageEmbed.react(RocketLeagueEmoji);
         messageEmbed.react(SatisfactoryEmoji);
         messageEmbed.react(SpaceEngineersEmoji);
+        messageEmbed.react(StarbaseEmoji);
         messageEmbed.react(WatchDogsEmoji);
         // messageEmbed.react(MiniGamesEmoji);
 
@@ -145,6 +149,9 @@ module.exports = {
                 }
                 if (reaction.emoji.name === 'SE') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(SpaceEngineersRole).catch(console.error);
+                }
+                if (reaction.emoji.name === 'Starbase') {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(StarbaseRole).catch(console.error);
                 }
                 if (reaction.emoji.name === 'WD') {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(WatchDogsRole).catch(console.error);
@@ -208,6 +215,9 @@ module.exports = {
                 }
                 if (reaction.emoji.name === 'SE') {
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(SpaceEngineersRole).catch(console.error);
+                }
+                if (reaction.emoji.name === '?') {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(StarbaseRole).catch(console.error);
                 }
                 if (reaction.emoji.name === 'WD') {
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(WatchDogsRole).catch(console.error);

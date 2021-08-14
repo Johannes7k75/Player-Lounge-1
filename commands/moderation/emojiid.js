@@ -1,12 +1,13 @@
 module.exports = {
     name: 'emojiid',
     aliases: ['eid'],
-    category: 'infos',
+    category: 'Infos',
     permissions: [],
     utilisation: '{prefix}emojiid',
 
     async execute(client, message, args) {
         const Discord = require('discord.js');
+        message.delete()
         console.log(client.emojis.cache.get((emojis) => emojis.name === ':flag_gb:'));
         const embed = new Discord.MessageEmbed().setTitle('Emoji').setDescription('ID:');
         const embedmessage = await message.channel.send(embed);
@@ -19,7 +20,8 @@ module.exports = {
                 } else {
                     embedmessage.edit({ embed: { title: `Emoji: ${collected.first()._emoji.name}`, description: `ID: \`${collected.first()._emoji.id}\`` } });
                 }
+                collected.delete({ timeout: 300000 })
             } // Getting the first reaction in the collection.
-        );
+        )
     },
 };

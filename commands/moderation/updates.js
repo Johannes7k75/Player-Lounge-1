@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['up'],
     category: 'moderation',
     permissions: [],
-    utilisation: '{prefix}updates [de/en]',
+    utilisation: '{prefix}updates [de/en] [title] [conetnt]',
 
     execute(client, message, args) {
         if (!args[2]) return message.channel.send(`Please enter the content after the title.`).then((msg) => msg.delete({ timeout: 10000 }));
@@ -12,7 +12,7 @@ module.exports = {
         }
         if (args[0].toLowerCase() === 'de') {
             console.log(args);
-            let title = args[1].replace(/\/space/gm, ' ');
+            let title = args[1].replace(/\/\//gm, ' ');
             args.splice(0, 2);
             message.channel.send({
                 embed: {
@@ -24,7 +24,7 @@ module.exports = {
             });
         } else if (args[0].toLowerCase() === 'en') {
             console.log(args);
-            let title = args[1].replace(/\/space/gm, ' ');
+            let title = args[1].replace(/\/\//gm, ' ');
             args.splice(0, 2);
             message.channel.send({
                 embed: {

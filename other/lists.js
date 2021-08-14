@@ -17,6 +17,12 @@ module.exports = {
 				"E_1lolix",
 				"Kahrmii",
 				"LordAlpha_"
+			],
+			"rols": [
+				{
+					"name": "Admin",
+					"id": "685178501183438918"
+				}
 			]
 		},
 		{
@@ -26,19 +32,37 @@ module.exports = {
 				"htop - linux taskmanager in console",
 				"pwd - Zeigt Pfad an wo man gerade ist",
 				"bash führt aus so wie ./ aber sie führen nicht auf der selben art und weise gleich aus"
-			]
+			],
+			"rols": []
 		},
 		{
 			"name": "Discord Funktionen",
 			"fields": [
-				"mit \\_ kann man zwei unterstiche benutzen"
-			]
+				"mit \\_ kann man zwei unterstiche benutzen",
+				"mit \\ vor einem emoji kannst du die id bekommen",
+			],
+			"rols": []
 		},
 		{
 			"name": "docker",
 			"fields": [
 				"docker ps - zeigt alle aktiven Sitzungen an"
-			]
+			],
+			"rols": []
+		},
+		{
+			"name": "Software",
+			"fields": [
+				"YaTQA - Für TeamSpeak 3 Verwaltung"
+			],
+			"rols": []
+		},
+		{
+			"name": "Website",
+			"fields": [
+				"app://argument - öffnet die app mit dem jewailgem argument z.b. steam://open/console"
+			],
+			"rols": []
 		}
 	]
 }

@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['td'],
     category: 'Infos',
     permissions: [],
-    utilisation: '{prefix}todo [priority 1 hightest, 4 lowest] [title] [description]',
+    utilisation: '{prefix}todo [priority 1 hightest, 4 lowest] [title space=//] [description]',
 
     execute(client, message, args) {
         const Discord = require('discord.js');
@@ -28,9 +28,10 @@ module.exports = {
         }
 
         const description = args.slice(2).join(' ');
+        const title = args[1].replace(/\/\//gm, ' ')
         const embed = new Discord.MessageEmbed()
             .setColor(prio)
-            .setTitle(prio_num + args[1])
+            .setTitle(prio_num + title)
             .setAuthor(message.author.username, message.author.displayAvatarURL({ dynamic: false, format: 'png' }))
             .setDescription('<@&844206736197550100>\n' + description)
             .setTimestamp();

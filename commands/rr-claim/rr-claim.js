@@ -23,6 +23,7 @@ module.exports = (client) => {
     const RocketLeagueEmoji = '<:RL:760926585179865129>';
     const SatisfactoryEmoji = '<:Satisfactory:801178296129683476>';
     const SpaceEngineersEmoji = '<:SE:725608377454952479>';
+    const StarbaseEmoji = '<:Starbase:875814526451351552>';
     const WatchDogsEmoji = '<:WD:733338295353737387>';
 
     const emojis = {
@@ -41,6 +42,7 @@ module.exports = (client) => {
         RL: 'Rocket League',
         Satisfactory: 'Satisfactory',
         SE: 'Space Engineers',
+        Starbase: 'Starbase',
         WD: 'Watch Dogs',
     };
 
@@ -72,6 +74,7 @@ module.exports = (client) => {
                     `${RocketLeagueEmoji} : Rocket League\n` +
                     `${SatisfactoryEmoji} : Satisfactory\n` +
                     `${SpaceEngineersEmoji} : Space Engineers\n` +
+                    `${StarbaseEmoji} : Starbase\n` +
                     `${WatchDogsEmoji} : Watch Dogs\n\n`
             );
     }
@@ -102,7 +105,7 @@ module.exports = (client) => {
             member.roles.add(role).catch(console.log);
         }
 
-        if (member.roles.cache.some((r) => ['Apex', 'ARK', 'Among Us', 'Battlefront', 'Call of Duty', "Garry's Mod", 'GTA', 'Minecraft', 'Rainbow6Siege', 'Rocket League', 'Satisfactory', 'Space Engineers', 'Watch Dogs'].includes(r.name))) {
+        if (member.roles.cache.some((r) => ['Apex', 'ARK', 'Among Us', 'Battlefront', 'Call of Duty', "Garry's Mod", 'GTA', 'Minecraft', 'Rainbow6Siege', 'Rocket League', 'Satisfactory', 'Starbase', 'Space Engineers', 'Watch Dogs'].includes(r.name))) {
             member.roles.remove(spiele).catch(console.log);
         } else {
             member.roles.add(spiele).catch(console.log);

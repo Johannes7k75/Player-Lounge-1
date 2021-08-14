@@ -1,4 +1,4 @@
-const rrclaim = require('../rr-message/test');
+const rrclaim = require('../rr-claim/claim');
 const updateMembers = require('../../counters/member-counter');
 
 module.exports = (client) => {

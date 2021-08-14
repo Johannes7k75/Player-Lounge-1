@@ -1,7 +1,7 @@
 /**
  * @prettier
  */
-const gamesMessage = require('../rr-message/test');
+const gamesMessage = require('../rr-claim/claim');
 const Discord = require('discord.js');
 
 module.exports = (client) => {
@@ -60,22 +60,22 @@ module.exports = (client) => {
             .setColor('#ff0000')
             .setDescription(
                 'Please choose the games you own\n\n' +
-                    `${ApexEmoji} : Apex\n` +
-                    `${ArkEmoji} : Ark\n` +
-                    `${AmongUSEmoji} : Among Us\n` +
-                    `${BattleFrontEmoji} : Battle Front\n` +
-                    `${CSGOEmoji} : CSGO\n` +
-                    `${CODEmoji} : Call of Duty\n` +
-                    `${ECOEmoji} : Eco\n` +
-                    `${GarrysModEmoji} : Garry's Mod\n` +
-                    `${GTAEmoji} : GTA V\n` +
-                    `${MinecraftEmoji} : Minecraft\n` +
-                    `${Rainbow6SiegeEmoji} : Rainbow Six Siege\n` +
-                    `${RocketLeagueEmoji} : Rocket League\n` +
-                    `${SatisfactoryEmoji} : Satisfactory\n` +
-                    `${SpaceEngineersEmoji} : Space Engineers\n` +
-                    `${StarbaseEmoji} : Starbase\n` +
-                    `${WatchDogsEmoji} : Watch Dogs\n\n`
+                `${ApexEmoji} : Apex\n` +
+                `${ArkEmoji} : Ark\n` +
+                `${AmongUSEmoji} : Among Us\n` +
+                `${BattleFrontEmoji} : Battle Front\n` +
+                `${CSGOEmoji} : CSGO\n` +
+                `${CODEmoji} : Call of Duty\n` +
+                `${ECOEmoji} : Eco\n` +
+                `${GarrysModEmoji} : Garry's Mod\n` +
+                `${GTAEmoji} : GTA V\n` +
+                `${MinecraftEmoji} : Minecraft\n` +
+                `${Rainbow6SiegeEmoji} : Rainbow Six Siege\n` +
+                `${RocketLeagueEmoji} : Rocket League\n` +
+                `${SatisfactoryEmoji} : Satisfactory\n` +
+                `${SpaceEngineersEmoji} : Space Engineers\n` +
+                `${StarbaseEmoji} : Starbase\n` +
+                `${WatchDogsEmoji} : Watch Dogs\n\n`
             );
     }
     // `Would you like to have little Minigames to play them react with ${MiniGamesEmoji}`

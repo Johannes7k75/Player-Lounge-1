@@ -9,8 +9,11 @@
   "author": "Jonas",
   "license": "ISC",
   "dependencies": {
-    "canvacord": "^5.2.0",
+    "canvacord": "^5.2.3",
+    "canvas": "^2.8.0",
     "chalk": "^4.1.1",
+    "chart.js": "^2.9.4",
+    "chartjs-node-canvas": "^3.2.0",
     "discord.js": "^12.5.3",
     "ffmpeg-static": "^4.4.0",
     "mongoose": "^5.12.10",

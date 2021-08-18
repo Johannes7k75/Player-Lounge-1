@@ -17,8 +17,11 @@ module.exports = async (client, reaction, user, message) => {
             return;
         }
         if (reaction_name === '✅') {
-            url = 'https://images.emojiterra.com/twitter/v13.0/512px/2705.png';
+            url = 'https://images.emojiterra.com/twitter/v13.0/512px/2705.png'; reaction.message.embeds[0]
             status = 'ready';
+            title_embed = reaction.message.embeds[0].title.split(' ')
+            title_embed.splice(0, 1)
+            client.channels.cache.get('832748810324541440').send({ embed: { description: `[To-do](${reaction.message.url}) wurde von  fertig gestellt\nTitle: ${title_embed.join('')}`, color: '#2ECC70', footer: { text: `gedrückt von ${user.username}#${user.discriminator}` } } });
         }
         if (reaction_name === '🕒') {
             url = 'https://images.emojiterra.com/twitter/v13.0/512px/1f552.png';

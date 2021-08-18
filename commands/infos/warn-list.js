@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'warn-list',
     aliases: [],
-    category: 'moderation',
+    category: 'Infos',
     permissions: [],
     utilisation: '{prefix}warn-list',
 
@@ -12,7 +12,7 @@ module.exports = {
         if (args <= 0) {
         }
         // const Util = require('../../node_modules/canvacord/plugins/Util');
-        const Util = require('../../node_modules/canvacord/plugins/Util');
+        const Util = require('canvacord/plugins/Util');
         const guildId = message.guild.id;
         await mongo().then(async (mongoose) => {
             try {

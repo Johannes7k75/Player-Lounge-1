@@ -1,7 +1,7 @@
 module.exports = {
     name: 'debug',
     aliases: [],
-    category: 'Infos',
+    category: 'Dev',
     permissions: [],
     utilisation: '{prefix}debug',
 

@@ -1,7 +1,7 @@
 module.exports = {
     name: 'unban',
     aliases: [],
-    category: 'moderation',
+    category: 'Moderation',
     permissions: ['BAN_MEMBERS'],
     permissions: [],
     utilisation: '{prefix}unban [ID] <Reason>',

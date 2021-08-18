@@ -1,7 +1,7 @@
 module.exports = {
     name: 'updates',
     aliases: ['up'],
-    category: 'moderation',
+    category: 'Infos',
     permissions: [],
     utilisation: '{prefix}updates [de/en] [title] [conetnt]',
 

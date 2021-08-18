@@ -1,7 +1,7 @@
 module.exports = {
     name: 'leaderbord',
     aliases: ['lb'],
-    category: 'levelsystem',
+    category: 'Levelsystem',
     permissions: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
     cooldown: 10,
     utilisation: '{prefix}leaderbord',

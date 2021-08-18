@@ -2,7 +2,7 @@ const { rols } = require('../../config/bot');
 module.exports = {
     name: 'test',
     aliases: [],
-    category: 'moderation',
+    category: 'Dev',
     role_permissions: [rols.dev],
     utilisation: '{prefix}test',
 

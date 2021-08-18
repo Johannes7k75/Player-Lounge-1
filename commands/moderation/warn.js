@@ -3,7 +3,7 @@ const mongo = require('../../other/mongo_local');
 module.exports = {
     name: 'warn',
     aliases: [],
-    category: 'moderation',
+    category: 'Moderation',
     permissions: [],
     utilisation: '{prefix}warn [Mention] [Reason]',
 

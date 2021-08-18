@@ -1,7 +1,7 @@
 module.exports = {
     name: 'clear',
     aliases: ['c'],
-    category: 'moderation',
+    category: 'Moderation',
     permissions: ['MANAGE_MESSAGES'],
     utilisation: '{prefix}clear [num]',
 

@@ -4,7 +4,7 @@
 module.exports = {
     name: 'restart',
     aliases: ['re'],
-    category: 'moderation',
+    category: 'Infos',
     permissions: [],
     utilisation: '{prefix}restart [BOT]',
 

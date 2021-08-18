@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'rankcard',
     aliases: ['rankc'],
-    category: 'levelsystem',
+    category: 'Levelsystem',
     permissions: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
     utilisation: '{prefix}rankcard [IMG URL]',
 

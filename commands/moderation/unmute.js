@@ -4,7 +4,7 @@ const mongo = require('../../other/mongo_local');
 module.exports = {
     name: 'unmute',
     aliases: [],
-    category: 'moderation',
+    category: 'Moderation',
     permissions: [],
     utilisation: '{prefix}unmute [user]',
     async execute(client, message, args) {

@@ -1,7 +1,7 @@
 module.exports = {
     name: 'kick',
     aliases: [],
-    category: 'moderation',
+    category: 'Moderation',
     permissions: ['KICK_MEMBERS'],
     utilisation: '{prefix}kick [Mention] [Reason]',
 

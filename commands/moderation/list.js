@@ -2,7 +2,7 @@ const { rols } = require('../../config/bot');
 module.exports = {
     name: 'list',
     aliases: [],
-    category: 'moderation',
+    category: 'Moderation',
     permissions: [],
     role_permissions: [rols.team],
     utilisation: '{prefix}list',

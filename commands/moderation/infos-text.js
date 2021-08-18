@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'infos-text',
     aliases: [],
-    category: 'moderation',
+    category: 'Moderation',
     permissions: [],
     utilisation: '{prefix}infos',
 

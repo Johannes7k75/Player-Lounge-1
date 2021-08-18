@@ -1,4 +1,4 @@
-const rrclaim = require('../rr-claim/claim');
+const rrclaim = require('./claim');
 const updateMembers = require('../../counters/member-counter');
 
 module.exports = (client) => {

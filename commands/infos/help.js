@@ -12,11 +12,11 @@ module.exports = {
                 .map((x) => '`' + x.name + '`')
                 .join(', ');
             const lvlsystem = message.client.commands
-                .filter((x) => x.category == 'levelsystem')
+                .filter((x) => x.category == 'Levelsystem')
                 .map((x) => '`' + x.name + '`')
                 .join(', ');
             const moderation = message.client.commands
-                .filter((x) => x.category == 'moderation')
+                .filter((x) => x.category == 'Moderation')
                 .map((x) => '`' + x.name + '`')
                 .join(', ');
 

@@ -31,7 +31,8 @@ module.exports = {
 				"lsusb - listet alle Usb-Ports auf",
 				"htop - linux taskmanager in console",
 				"pwd - Zeigt Pfad an wo man gerade ist",
-				"bash führt aus so wie ./ aber sie führen nicht auf der selben art und weise gleich aus"
+				"bash führt aus so wie ./ aber sie führen nicht auf der selben art und weise gleich aus",
+				"pm2 logs [id] - get the pm2 console"
 			],
 			"rols": []
 		},
@@ -39,7 +40,7 @@ module.exports = {
 			"name": "Discord Funktionen",
 			"fields": [
 				"mit \\_ kann man zwei unterstiche benutzen",
-				"mit \\ vor einem emoji kannst du die id bekommen",
+				"mit \\ vor einem emoji kannst du die id bekommen"
 			],
 			"rols": []
 		},

@@ -4,7 +4,8 @@ module.exports = async (client) => {
     client.user.setActivity(`${client.config.discord.prefix}help | bit.ly/3qUjF5i`, { type: 'PLAYING', url: 'https://www.Player-Lounge.de/' });
     require('../../counters/member-counter')(client);
     require('../../commands/rr-claim/rr-games')(client);
-    require('../../commands/rr-claim/r-regeln')(client);
+    require('../../commands/rr-claim/allRegeln')(client);
+    require('../../commands/rr-claim/teamRegeln')(client)
     require('../../other/levels')(client);
     require('../../other/jointocreate')(client);
     await require('../../other/mongo')()

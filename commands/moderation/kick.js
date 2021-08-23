@@ -3,7 +3,7 @@ module.exports = {
     aliases: [],
     category: 'Moderation',
     permissions: ['KICK_MEMBERS'],
-    utilisation: '{prefix}kick [Mention] [Reason]',
+    utilisation: '{prefix}kick [@User] [Reason]',
 
     async execute(client, message, args) {
         if (!message.guild) return;

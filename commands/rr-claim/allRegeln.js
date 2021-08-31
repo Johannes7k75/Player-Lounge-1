@@ -68,9 +68,13 @@ module.exports = (client) => {
             value: 'Commands düfen nicht gespammt oder ausgenutzt werden. Bei Fehlern von commands wird dies dem Server-Team gemeldet.'
         },
         {
+            title: '§11 Nickname',
+            value: 'Es dürfen keine Sonderzeichen benutzt werden beim Nickname außer es handelt sich um die [2] Bedingung',
+        },
+        {
             title: 'Bedingungen',
             value: '[1] Es muss jeder im Call einverstanden sein.\n[2] Absprache mit Moderatoren und aufwärts.'
-        },
+        }
     ]
 
     for (i = 0; i < Regeln.length; i++) {

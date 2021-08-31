@@ -3,8 +3,7 @@ module.exports = async (client) => {
     const regelChat = '875837401564594236'
     const channel = await client.channels.fetch(regelChat);
 
-
-    let teamRegeln = [
+    teamRegeln = [
         {
             title: '[Object]',
             value: '[Object, Object]'

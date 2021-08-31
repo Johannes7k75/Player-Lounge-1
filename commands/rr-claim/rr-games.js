@@ -24,6 +24,7 @@ module.exports = (client) => {
     const SatisfactoryEmoji = '<:Satisfactory:801178296129683476>';
     const SpaceEngineersEmoji = '<:SE:725608377454952479>';
     const StarbaseEmoji = '<:Starbase:875814526451351552>';
+    const ValorantEmoji = '<:Valorant:880115112176926791>';
     const WatchDogsEmoji = '<:WD:733338295353737387>';
 
     const emojis = {
@@ -43,6 +44,7 @@ module.exports = (client) => {
         Satisfactory: 'Satisfactory',
         SE: 'Space Engineers',
         Starbase: 'Starbase',
+        Valorant: 'Valorant',
         WD: 'Watch Dogs',
     };
 
@@ -75,6 +77,7 @@ module.exports = (client) => {
                 `${SatisfactoryEmoji} : Satisfactory\n` +
                 `${SpaceEngineersEmoji} : Space Engineers\n` +
                 `${StarbaseEmoji} : Starbase\n` +
+                `${ValorantEmoji} : Valorant\n` +
                 `${WatchDogsEmoji} : Watch Dogs\n\n`
             );
     }

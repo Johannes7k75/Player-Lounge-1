@@ -1,8 +1,10 @@
 const rrclaim = require('./claim');
 const updateMembers = require('../../counters/member-counter');
+const { MessageButton } = require('discord-buttons');
 
 module.exports = (client) => {
     const Discord = require('discord.js')
+    require("discord-buttons")(client);
     const channelId = '747870506262462474';
 
     const getEmoji = (emojiName) => client.emojis.cache.find((emoji) => emoji.name === emojiName);
@@ -61,7 +63,7 @@ module.exports = (client) => {
         },
         {
             title: '§ 9.1 Team',
-            value: 'Falls Beweise für nicht faires Verhalten der Teammitglieder vorhanden sind, sind diese wen Möglich anderen Mitgliedern zu überreichen. Da trifft §9 in Kraft.'
+            value: 'Falls Beweise für nicht faires Verhalten der Teammitglieder vorhanden sind, sind diese wen Möglich anderen Mitgliedern zu überreichen. \nDa trifft **§9** in Kraft.'
         },
         {
             title: '§10 Commands',
@@ -70,6 +72,10 @@ module.exports = (client) => {
         {
             title: '§11 Nickname',
             value: 'Es dürfen keine Sonderzeichen benutzt werden beim Nickname außer es handelt sich um die [2] Bedingung',
+        },
+        {
+            title: '§12 Minigames',
+            value: 'Ohne der **[1] Bedingung** dürfen keine spiele außerhalb von der Minigames Kategorie benutzt werden.',
         },
         {
             title: 'Bedingungen',
@@ -87,6 +93,9 @@ module.exports = (client) => {
         const emoji = getEmoji(key);
         reactions.push(emoji);
     }
+
+    // const button = require('discord-buttons')
+    // let button = new MessageButton().setStyle('blurple').setLabel('Verfificate').setID('test')
 
     rrclaim(client, channelId, embed, reactions);
 

@@ -3,6 +3,7 @@ module.exports = {
     aliases: ['urlaub'],
     category: 'Infos',
     permissions: [],
+    description: 'Ein Team Command zum Abmelden',
     utilisation: '{prefix}abmeldung [date example: 18.8.2021-19.9.2021] [Reason]',
 
     execute(client, message, args) {

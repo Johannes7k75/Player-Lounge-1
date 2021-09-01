@@ -1,15 +1,15 @@
 module.exports = {
-    name: 'leaderbord',
+    name: 'leaderboard',
     aliases: ['lb'],
     category: 'Levelsystem',
     permissions: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
     cooldown: 10,
-    utilisation: '{prefix}leaderbord',
+    utilisation: '{prefix}leaderboard',
     permission: 'everyone',
 
     async execute(client, message, args) {
         const Discord = require('discord.js');
-        const Util = require('../../node_modules/canvacord/plugins/Util');
+        const Util = require('canvacord/plugins/Util');
         const mongo = require('../../other/mongo');
         const profileSchema = require('../../schemas/profile-schema');
         var cpage;
@@ -64,7 +64,7 @@ module.exports = {
                 }
                 message.channel.send(embed).then((embedMessage) => {
                     embedMessage.react('◀️');
-                    embedMessage.react('⏺️');
+                    embedMessage.react('⏹️');
                     embedMessage.react('▶️');
                 });
                 client.on('messageReactionAdd', async (reaction, user) => {
@@ -84,6 +84,9 @@ module.exports = {
                     }
                     if (reaction_name === '▶️') {
                         cpage++;
+                    }
+                    if (reaction_name === '⏹️') {
+                        reaction.message.delete()
                     }
                     if (cpage > Math.ceil(result.length / 10)) {
                         cpage--;

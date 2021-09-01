@@ -4,7 +4,7 @@
 const gamesMessage = require('../rr-claim/claim');
 const Discord = require('discord.js');
 
-module.exports = (client) => {
+module.exports = async (client) => {
     const channelId = '685180105110454337';
 
     const getEmoji = (emojiName) => client.emojis.cache.find((emoji) => emoji.name === emojiName);
@@ -19,6 +19,7 @@ module.exports = (client) => {
     const GarrysModEmoji = '<:GM:733335087005040650>';
     const GTAEmoji = '<:GTA:733335887152283769>';
     const MinecraftEmoji = '<:MC:733335137298939935>';
+    const MinigamesEmoji = '<:Minigames:806948028795060299>';
     const Rainbow6SiegeEmoji = '<:R6S:733335151060451348>';
     const RocketLeagueEmoji = '<:RL:760926585179865129>';
     const SatisfactoryEmoji = '<:Satisfactory:801178296129683476>';
@@ -42,10 +43,11 @@ module.exports = (client) => {
         R6S: 'Rainbow6Siege',
         RL: 'Rocket League',
         Satisfactory: 'Satisfactory',
-        SE: 'Space Engineers',
         Starbase: 'Starbase',
+        SE: 'Space Engineers',
         Valorant: 'Valorant',
         WD: 'Watch Dogs',
+        Minigames: 'Minigames',
     };
 
     const reactions = [];
@@ -75,16 +77,17 @@ module.exports = (client) => {
                 `${Rainbow6SiegeEmoji} : Rainbow Six Siege\n` +
                 `${RocketLeagueEmoji} : Rocket League\n` +
                 `${SatisfactoryEmoji} : Satisfactory\n` +
-                `${SpaceEngineersEmoji} : Space Engineers\n` +
                 `${StarbaseEmoji} : Starbase\n` +
+                `${SpaceEngineersEmoji} : Space Engineers\n` +
                 `${ValorantEmoji} : Valorant\n` +
-                `${WatchDogsEmoji} : Watch Dogs\n\n`
+                `${WatchDogsEmoji} : Watch Dogs\n\n` +
+                `${MinigamesEmoji} : Minigames\n\n` +
+                `Wenn du mit den Minigames spielen möchtest dann, Reagiere mit dem ${MinigamesEmoji}\n Es läuft üder den **Grudge-Bot** mit dem **Prefix: g!**`
             );
     }
-    // `Would you like to have little Minigames to play them react with ${MiniGamesEmoji}`
     gamesMessage(client, channelId, emojiText, reactions);
 
-    const handleReaction = (reaction, user, add) => {
+    const handleReaction = async (reaction, user, add) => {
         if (user.id === '743800065650327572') {
             return;
         }
@@ -98,21 +101,30 @@ module.exports = (client) => {
             return;
         }
 
-        const role = guild.roles.cache.find((role) => role.name === roleName);
-        const spiele = guild.roles.cache.get('775362618675560498');
-        const member = guild.members.cache.find((member) => member.id === user.id);
+        let role = guild.roles.cache.find((role) => role.name === roleName);
+        let spiele = guild.roles.cache.get('775362618675560498');
+        let member = guild.members.cache.find((member) => member.id === user.id);
 
         if (member.roles.cache.has(role.id)) {
-            member.roles.remove(role).catch(console.log);
+            await member.roles.remove(role) //.catch(console.log);
         } else {
-            member.roles.add(role).catch(console.log);
+            await member.roles.add(role) //.catch(console.log);
         }
 
-        if (member.roles.cache.some((r) => ['Apex', 'ARK', 'Among Us', 'Battlefront', 'Call of Duty', "Garry's Mod", 'GTA', 'Minecraft', 'Rainbow6Siege', 'Rocket League', 'Satisfactory', 'Starbase', 'Space Engineers', 'Watch Dogs'].includes(r.name))) {
-            member.roles.remove(spiele).catch(console.log);
-        } else {
-            member.roles.add(spiele).catch(console.log);
+
+        member = await guild.members.cache.find((member) => member.id === user.id);
+
+
+        let arr = ['Minigames', 'Apex', 'ARK', 'Among Us', 'Battlefront', 'Call of Duty', "Garry's Mod", 'GTA V', 'Minecraft', 'Rainbow6Siege', 'Rocket League', 'Satisfactory', 'Starbase', 'Space Engineers', 'Valorant', 'Watch Dogs']
+        for (i = 0; i < arr.length; i++) {
+            if (member.roles.cache.has(guild.roles.cache.find((role) => role.name === arr[i]).id)) {
+                member.roles.add(spiele) //.catch(console.log);
+
+                return
+            }
+
         }
+        member.roles.remove(spiele) //.catch(console.log);
     };
 
     client.on('messageReactionAdd', (reaction, user) => {
@@ -121,13 +133,4 @@ module.exports = (client) => {
         }
     });
 
-    // client.on('messageReactionRemove', (reaction, user) => {
-    //     if (reaction.message.channel.id === channelId) {
-    //         handleReaction(reaction, user, false);
-    //     }
-    // });
 };
-
-// process.on('unhandledRejection', error => {
-// 	console.error('Unhandled promise rejection:', error);
-// });

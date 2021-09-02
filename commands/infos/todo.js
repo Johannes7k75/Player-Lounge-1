@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['td'],
     category: 'Infos',
     permissions: [],
-    utilisation: '{prefix}todo [priority 1 hightest, 4 lowest] [title space=//] [description]',
+    utilisation: '{prefix}todo [priority 1 hightest, 4 lowest] [title, // for a space] [description]',
 
     execute(client, message, args) {
         const Discord = require('discord.js');

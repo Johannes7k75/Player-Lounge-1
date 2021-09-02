@@ -3,7 +3,7 @@ module.exports = {
     aliases: ['up'],
     category: 'Infos',
     permissions: [],
-    utilisation: '{prefix}updates [de/en] [title] [conetnt]',
+    utilisation: '{prefix}updates [de/en] [title, // for a space] [conetnt]',
 
     execute(client, message, args) {
         if (!args[2]) return message.channel.send(`Please enter the content after the title.`).then((msg) => msg.delete({ timeout: 10000 }));

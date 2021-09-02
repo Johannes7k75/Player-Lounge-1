@@ -75,7 +75,7 @@ module.exports = {
 
                 select.addOption(new MessageMenuOption().setLabel('Back').setValue('back_command').setDescription('goes one step back').setEmoji('↩'))
                 let embedCategory
-                let embed = new MessageEmbed().setTitle('Help Menu').setColor('ORANGE')//.addField({ name: embedCategory.name, value: embedCategory.value })
+                let embed = new MessageEmbed().setTitle('Help Menu').setColor('ORANGE')
                 if (cat === 'infos') {
                     embed.addField('Infos', 'Alles rund um den Bot')
                 } else if (cat === 'dev') {
@@ -92,7 +92,6 @@ module.exports = {
                     select.addOption(new MessageMenuOption().setLabel(commands[menu.values][i].name).setValue(commands[menu.values][i].name).setDescription(commands[menu.values][i].description))
                 }
                 menu.message.edit(embed, select)
-                // menu.channel.send(`You choose: **${menu.values}**`)
                 menu.reply.send(`You choose: **${menu.values}**`, false).then(msg => { setTimeout(() => msg.delete(), 5000) })
             }
             if (menu.id === 'commands') {
@@ -126,6 +125,7 @@ module.exports = {
                 }
 
                 menu.reply.send(`You choose: ** ${menu.values} ** `, false).then(msg => { setTimeout(() => msg.delete(), 5000) })
+
                 menu.message.edit(embed, cmdMenu)
             }
         })

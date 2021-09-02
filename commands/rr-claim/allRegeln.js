@@ -76,6 +76,9 @@ module.exports = (client) => {
         {
             title: '§12 Minigames',
             value: 'Ohne der **[1] Bedingung** dürfen keine spiele außerhalb von der Minigames Kategorie benutzt werden.',
+        }, {
+            title: '§13 Streaming',
+            value: 'Es ist nicht erlaubt außerhalb der Streaming Kategorie zu Streamen auf anderen Plattformen so wie Twitch und anderem, so lange es sich nicht um die [1] Bedingung handelt.'
         },
         {
             title: 'Bedingungen',

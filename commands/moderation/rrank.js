@@ -18,13 +18,14 @@ module.exports = {
             indexOfHoist = rankRols.indexOf(hoistrole);
             return indexOfHoist;
         }
+        const teamrole = '806213938340560907'
 
         const rankRols = [
             rols.owner[0],
             rols.admin[0],
             rols.moderator[0],
             rols.supporter[0],
-            // cosupporter: rols.cosupporter,
+            rols.cosupporter[0],
             rols.verifiziert[0],
         ];
 
@@ -33,7 +34,7 @@ module.exports = {
             rols.admin[2],
             rols.moderator[2],
             rols.supporter[2],
-            // cosupporter: rols.cosupporter,
+            rols.cosupporter[2],
             rols.verifiziert[2],
         ];
         if (!args[0] || args[0].toLowerCase() === ('up' || 'down')) {
@@ -51,7 +52,7 @@ module.exports = {
             if (authorindex + 1 >= mentionindex) {
                 return message.channel.send(`You can not Upgrade a User with the same / higher Role`);
             }
-            if (rankRols[mentionindex] === rankRols[4]) {
+            if (rankRols[mentionindex] === rankRols[5]) {
                 client.guilds.cache
                     .get(message.guild.id)
                     .members.cache.get(message.mentions.users.first().id)
@@ -60,7 +61,8 @@ module.exports = {
                     .get(message.guild.id)
                     .members.cache.get(message.mentions.users.first().id)
                     .roles.add(plRols[mentionindex - 1]);
-                client.guilds.cache.get(message.guild.id).members.cache.get(message.mentions.users.first().id).roles.remove(plRols[mentionindex]);
+                client.guilds.cache.get(message.guild.id).members.cache.get(message.mentions.users.first().id).roles.add(teamrole) // Give him the Team Role
+                client.guilds.cache.get(message.guild.id).members.cache.get(message.mentions.users.first().id).roles.remove(plRols[mentionindex]); // Remove the green Player-Lounge Role
             } else {
                 client.guilds.cache
                     .get(message.guild.id)
@@ -100,6 +102,9 @@ module.exports = {
                     .roles.add(plRols[mentionindex + 1]);
                 client.guilds.cache.get(message.guild.id).members.cache.get(message.mentions.users.first().id).roles.remove(rankRols[mentionindex]);
                 client.guilds.cache.get(message.guild.id).members.cache.get(message.mentions.users.first().id).roles.remove(plRols[mentionindex]);
+                if (mentionindex >= rankRols.length) {
+                    client.guilds.cache.get(message.guild.id).members.cache.get(message.mentions.user.first().id).roles.remove(teamrole)
+                }
             }
             embed = {
                 embed: {

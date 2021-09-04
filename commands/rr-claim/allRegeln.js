@@ -1,10 +1,8 @@
 const rrclaim = require('./claim');
 const updateMembers = require('../../counters/member-counter');
-const { MessageButton } = require('discord-buttons');
 
 module.exports = (client) => {
     const Discord = require('discord.js')
-    require("discord-buttons")(client);
     const channelId = '747870506262462474';
 
     const getEmoji = (emojiName) => client.emojis.cache.find((emoji) => emoji.name === emojiName);

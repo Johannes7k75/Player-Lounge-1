@@ -1,4 +1,5 @@
 module.exports = async (client) => {
+    console.log('Test')
     const Discord = require('discord.js')
     const regelChat = '875837401564594236'
     const channel = await client.channels.fetch(regelChat);
@@ -6,7 +7,7 @@ module.exports = async (client) => {
     teamRegeln = [
         {
             title: '[Object]',
-            value: '[Object, Object]'
+            value: '[Object, Object ]'
         }
     ]
 

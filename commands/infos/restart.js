@@ -3,7 +3,7 @@
  */
 module.exports = {
     name: 'restart',
-    aliases: ['re'],
+    aliases: ['re', 'pm2'],
     category: 'Infos',
     permissions: [],
     utilisation: '{prefix}restart [BOT]',

@@ -1,7 +1,7 @@
 /**
  * @prettier
  */
-const gamesMessage = require('../rr-claim/claim');
+const gamesMessage = require('./claim');
 const Discord = require('discord.js');
 
 module.exports = async (client) => {

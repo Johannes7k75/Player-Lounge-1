@@ -54,6 +54,18 @@ module.exports = {
 				"\nE_The_Joker_7"
 			],
 			"rols": []
+		},
+		{
+			"name": "Windows cmd",
+			"fields": [
+				"sfc /SCANNOW - Only Administrator - Scannt den System Sactor auf Viren/Fehler ab"
+			],
+			"rols": []
+		},
+		{
+			"name": "Windows PowerShell",
+			"fields": [],
+			"rols": []
 		}
 	]
 }

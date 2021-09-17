@@ -24,7 +24,7 @@ module.exports = function (client) {
                         }
                     }
                 }
-            } catch {}
+            } catch { }
         }, 10000);
     });
 

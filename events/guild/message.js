@@ -63,7 +63,27 @@ module.exports = (client, message, Discord) => {
         }
     }
 
-    // Role permissions system
+    // Role permissions system with new role list
+    if (command.rolePermissions) {
+        if (command.rolePermissions.length) {
+            const { owner, admin, moderator, dev, supporter, team, sklave, streamerLive, nitroBooster, vip, muted, dj, verifiziert } = client.config.role;
+            const rolePermissions = [owner, admin, moderator, dev, supporter, team, sklave, streamerLive, nitroBooster, vip, muted, dj, verifiziert];
+            let invalidRoles = [];
+            for (const perm of command.rolePermissions) {
+                if (!rolePermissions.includes(perm)) {
+                    return console.log(`Invalid Roles: ${perm.name}`)
+                }
+                if (!message.member.roles.cache.has(perm.id)) {
+                    invalidRoles.push(perm.name)
+                }
+            }
+            if (invalidRoles.length) {
+                return message.channel.send(`Missing Role: \`${invalidRoles.join(', ')}\``)
+            }
+        }
+    }
+
+    // Role permissions system with old role list
     if (command.role_permissions) {
         if (command.role_permissions.length) {
             const { owner, admin, moderator, dev, supporter, team, sklave, streamer_live, nitro_booster, vip, muted, dj, verifiziert } = client.config.rols;
@@ -71,7 +91,7 @@ module.exports = (client, message, Discord) => {
             let invalidPerms = [];
             for (const perm of command.role_permissions) {
                 if (!role_permissions.includes(perm)) {
-                    return console.log(`Invalid Permission: ${perm[1]}`);
+                    return console.log(`Invalid Roles: ${perm[1]}`);
                 }
                 if (!message.member.roles.cache.has(perm[0])) {
                     invalidPerms.push(perm[1]);
@@ -103,14 +123,10 @@ module.exports = (client, message, Discord) => {
     setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
 
     let teamRole = message.guild.roles.cache.find((r) => r.name === 'Team');
-    if (message.member.roles.cache.has(teamRole.id)) {
-        if (command) command.execute(client, message, args, cmd, Discord);
+    // if (message.member.roles.cache.has(teamRole.id)) {
+    if (command) command.execute(client, message, args, cmd, Discord);
 
-        // Loging the who acces team commands
-        var stream = fs.createWriteStream('./config/log.txt', { flags: 'a' });
-        stream.write(message.author.username + '[' + 'Author.ID:' + message.author.id + '|' + 'Server:' + message.guild.name + ']' + ': ' + '"' + message.content + '"' + ' ' + new Date() + '\n');
-    } else if (cmds.permission === 'everyone') {
-        if (cmds) cmds.execute(client, message, args, Discord);
-        return;
-    }
+    // Loging the who acces team commands
+    var stream = fs.createWriteStream('./config/log.txt', { flags: 'a' });
+    stream.write(`${message.author.username} [Author.ID ${message.author.id} | Server: ${message.guild.name}]: "${message.content}" ${new Date()}\n`);
 };

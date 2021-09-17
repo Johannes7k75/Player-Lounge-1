@@ -1,10 +1,10 @@
+const { role } = require('../../config/bot')
 module.exports = {
     name: 'invite',
     aliases: [],
     category: 'Infos',
-    permissions: [],
+    rolePermissions: [role.dev],
     utilisation: '{prefix}invite',
-    permission: 'everyone',
 
     execute(client, message) {
         message.channel.send('Hier die Discord invite\nhttps://discord.gg/29NEpHcn9u');

@@ -37,7 +37,7 @@ module.exports = (client) => {
         },
         {
             title: '§4 2-Accounts',
-            value: '2-Accounts sind auf dem Server Verboten so lange die [2] Bedingung nicht erfüllt wurde.'
+            value: '2-Accounts oder mehr sind auf dem Server Verboten so lange die [2] Bedingung nicht erfüllt wurde.'
         },
         {
             title: '§5 Chat ',

@@ -15,6 +15,7 @@
     "chart.js": "^2.9.4",
     "chartjs-node-canvas": "^3.2.0",
     "discord-buttons": "^4.0.0",
+    "discord-ghost-transcript": "^1.0.1",
     "discord.js": "^12.5.3",
     "ffmpeg-static": "^4.4.0",
     "mongoose": "^5.12.10",

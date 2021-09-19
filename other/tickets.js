@@ -23,7 +23,7 @@ module.exports = async (client) => {
     // Ticket creator
     embed = new MessageEmbed().setTitle(ticket.title).setDescription(ticket.description).setColor(ticket.color);
 
-    const ticketCCh = await client.channels.fetch('888914245398437928');
+    const ticketCCh = await client.channels.fetch('879362496035704933');
     ticketCCh.messages.fetch().then((messages) => {
         if (messages.size === 0) {
             ticketCCh.send(embed, btn0);

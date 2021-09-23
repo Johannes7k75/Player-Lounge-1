@@ -4,7 +4,7 @@ const client = new Discord.Client({
     partials: ['MESSAGE', 'CHANNEL', 'USER', 'REACTION'],
     disableMentions: 'everyone',
 });
-require('discord-buttons')(client)
+require('discord-buttons')(client);
 
 client.chalk = require('chalk');
 client.config = require('./config/bot');

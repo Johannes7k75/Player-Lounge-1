@@ -8,7 +8,9 @@ module.exports = {
 				"pwd - Zeigt Pfad an wo man gerade ist",
 				"bash führt aus so wie ./ aber sie führen nicht auf der selben art und weise gleich aus",
 				"pm2 logs [id] - get the pm2 console",
-				"sudo chown -R [User] [Directory] - gibt user den ersteller für das Directory"
+				"sudo chown -R [User] [Directory] - gibt user den ersteller für das Directory",
+				"sudo su root - wechselt zum root User",
+				"sudo service ssh /stop/start/restart - ssh service für WSL"
 			],
 			"rols": []
 		},

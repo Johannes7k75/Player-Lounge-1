@@ -6,10 +6,14 @@ module.exports = (client) => {
         console.log(guild.roles.cache.get('765985461096677457').members.size);
     };
 
-    client.on('guildMemberAdd', (member) => updateMembers(member.guild));
-    console.log('Join Update Member');
-    client.on('guildMemberRemove', (member) => updateMembers(member.guild));
-    console.log('Leave Update Member');
+    client.on('guildMemberAdd', (member) => {
+        updateMembers(member.guild);
+        console.log('Join Update Member');
+    });
+    client.on('guildMemberRemove', (member) => {
+        updateMembers(member.guild);
+        console.log('Leave Update Member');
+    });
 
     updateMembers(guild);
 };

@@ -24,7 +24,7 @@ module.exports = function (client) {
                         }
                     }
                 }
-            } catch { }
+            } catch {}
         }, 10000);
     });
 
@@ -104,8 +104,30 @@ module.exports = function (client) {
     });
     async function jointocreatechannel(user) {
         //user.member.user.send("This can be used to message the member that a new room was created")
+
+        const ccFile = require('./cc.json');
+        let userCC;
+        ccFile.forEach((x) => {
+            x.userid === user.member.id;
+            userCC = ccFile.indexOf(x) || undefined;
+        });
+        if (userCC === undefined) {
+            console.log(undefined);
+            ccFile.push({
+                userid: user.id,
+                settings: {
+                    name: `${user.member.user.username}'s Lounge`,
+                    maxuser: 0,
+                    hidden: false,
+                    banned: [],
+                },
+            });
+            let data = JSON.stringify(ccFile, null, '\t');
+            require('fs').writeFileSync('./other/cc.json', data);
+        }
+
         await user.guild.channels
-            .create(`${user.member.user.username}'s Lounge`, {
+            .create(ccFile[userCC].settings.name, {
                 type: 'voice',
                 parent: client.guilds.cache.get(config.discord.guildid).channels.cache.get(config.discord.JOINTOCREATECHANNEL).parent.id, //or set it as a category id
             })
@@ -126,6 +148,32 @@ module.exports = function (client) {
                         allow: ['VIEW_CHANNEL'],
                     },
                 ]);
+
+                if (ccFile[userCC].settings.maxuser > 0) {
+                    console.log('Set user to', ccFile[userCC].settings.maxuser);
+                    await vc.setUserLimit(ccFile[userCC].settings.maxuser).then((vc) => console.log(`Set user limit to ${vc.userLimit} for ${vc.name}`));
+                }
+
+                if (ccFile[userCC].settings.hidden === true) {
+                    await vc.overwritePermissions([
+                        {
+                            id: user.guild.roles.everyone,
+                            deny: ['VIEW_CHANNEL'],
+                        },
+                    ]);
+                }
+
+                if (ccFile[userCC].settings.banned.length > 0) {
+                    for (let userid of ccFile[userCC].settings.banned) {
+                        let user = vc.guild.members.cache.get(userid);
+                        await vc.overwritePermissions([
+                            {
+                                id: user.id,
+                                deny: ['VIEW_CHANNEL'],
+                            },
+                        ]);
+                    }
+                }
             });
     }
 };

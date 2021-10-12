@@ -4,11 +4,22 @@ const cooldowns = new Map();
 module.exports = (client, message, Discord) => {
     const discord = require('discord.js');
     const prefix = '!';
+    const createChannelPrefix = 'cc!';
+    if ((message.content.startsWith(createChannelPrefix) && !message.author.bot) || message.content === 'cc!ban') {
+        const argscc = message.content.slice(createChannelPrefix.length).trim().split(/ +/g);
+        const cmdcc = argscc.shift().toLowerCase();
+        const commandcc = client.commands.find((c) => c.prefix === 'cc!' && c.name === cmdcc) || client.commands.find((a) => a.aliases && a.aliases.includes(cmdcc) && a.prefix === 'cc!');
+        client.commands.map((x) => x.prefix && console.log(x.name));
+        if (commandcc) {
+            commandcc.execute(client, message, argscc, cmdcc);
+            console.log(cmdcc);
+            return;
+        }
+    }
     if (message.author.bot || message.channel.type === 'dm' || !message.content.startsWith(prefix) || message.content === prefix) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
-
     const command = client.commands.get(cmd) || client.commands.find((a) => a.aliases && a.aliases.includes(cmd));
 
     const validPermissions = [
@@ -71,14 +82,14 @@ module.exports = (client, message, Discord) => {
             let invalidRoles = [];
             for (const perm of command.rolePermissions) {
                 if (!rolePermissions.includes(perm)) {
-                    return console.log(`Invalid Roles: ${perm.name}`)
+                    return console.log(`Invalid Roles: ${perm.name}`);
                 }
                 if (!message.member.roles.cache.has(perm.id)) {
-                    invalidRoles.push(perm.name)
+                    invalidRoles.push(perm.name);
                 }
             }
             if (invalidRoles.length) {
-                return message.channel.send(`Missing Role: \`${invalidRoles.join(', ')}\``)
+                return message.channel.send(`Missing Role: \`${invalidRoles.join(', ')}\``);
             }
         }
     }

@@ -1,66 +1,48 @@
 module.exports = (client, oldMember, newMember, message, Discord) => {
-    const supPL = '844218458861731881';
-    const sup = '685178677088092205';
+    const { supporter, moderator, admin, owner, streamerLive, verifiziert } = client.role
 
-    const modPL = '844213940476444702';
-    const mod = '685178528681164819';
+    if (newMember.roles.cache.has(streamerLive.plid) && newMember.roles.cache.has(streamerLive.id)) return;
+    // if the user has both roles Purple Pl and Streamer Live, return
 
-    const adminPL = '848282223497052221';
-    const admin = '685178501183438918';
-
-    const ownPL = '844212307936542781';
-    const own = '685176439493885996';
-
-    console.log(newMember.roles.cache.has(sup));
-
-    if (newMember.roles.cache.has('848282508520849438') && newMember.roles.cache.has('692086456923193346')) return;
-    if (newMember.roles.cache.has('692086456923193346')) {
-        // Remove lime Player-Lounge role
-        client.channels.cache.get('733195953170939915').send(newMember.user.username + ' got the role <@&848282508520849438>');
-        console.log(newMember.user.username + 'is live');
-        if (newMember.roles.cache.has('844219922338938920')) {
-            newMember.roles.remove('844219922338938920');
+    // if goes online
+    if (newMember.roles.cache.has(streamerLive.id)) {
+        if (!newMember.roles.cache.has(supporter.plid) && !newMember.roles.cache.has(moderator.plid) && !newMember.roles.cache.has(admin.plid) && !newMember.roles.cache.has(owner.plid)) {
+            newMember.roles.add(streamerLive.plid);
+            newMember.roles.remove(verifiziert.plid);
         }
-        if (newMember.roles.cache.has(sup)) {
-            newMember.roles.remove(supPL);
+        if (newMember.roles.cache.has(supporter.plid)) {
+            newMember.roles.remove(supporter.id);
         }
-        if (newMember.roles.cache.has(mod)) {
-            newMember.roles.remove(modPL);
+        if (newMember.roles.cache.has(moderator.plid)) {
+            newMember.roles.remove(moderator.id);
         }
-        if (newMember.roles.cache.has(admin)) {
-            newMember.roles.remove(adminPL);
+        if (newMember.roles.cache.has(admin.plid)) {
+            newMember.roles.remove(admin.id);
         }
-        if (newMember.roles.cache.has(own)) {
-            newMember.roles.remove(ownPL);
+        if (newMember.roles.cache.has(owner.plid)) {
+            newMember.roles.remove(owner.id);
         }
-
-        // Adde purple Player-Lounge role
-        newMember.roles.add('848282508520849438');
         return;
     }
 
-    if (newMember.roles.cache.has('848282508520849438') && !newMember.roles.cache.has('848283005830955018')) {
-        client.channels.cache.get('733195953170939915').send(newMember.user.username + ' got the role <@&848282508520849438> removed');
-        // Remove purple Player-Lounge role
-        newMember.roles.remove('848282508520849438');
-
-        // Adde lime Player-Lounge role
-        if (!newMember.roles.cache.has(sup) || !newMember.roles.cache.has(mod) || !newMember.roles.cache.has(admin) || !newMember.roles.cache.has(own)) {
-            newMember.roles.add('844219922338938920');
+    // if goes offline
+    if (oldMember.roles.cache.has(streamerLive.id)&&!newMember.roles.cache.has(streamerLive.id)) {
+        if (!newMember.roles.cache.has(supporter.plid) && !newMember.roles.cache.has(moderator.plid) && !newMember.roles.cache.has(admin.plid) && !newMember.roles.cache.has(owner.plid)) {
+            newMember.roles.remove(streamerLive.plid);
+            newMember.roles.add(verifiziert.plid);
         }
 
-        // Add the correct team role
-        if (newMember.roles.cache.has(sup)) {
-            newMember.roles.add(supPL);
+        if (newMember.roles.cache.has(supporter.plid)) {
+            newMember.roles.add(supporter.id);
         }
-        if (newMember.roles.cache.has(mod)) {
-            newMember.roles.add(modPL);
+        if (newMember.roles.cache.has(moderator.plid)) {
+            newMember.roles.add(moderator.id);
         }
-        if (newMember.roles.cache.has(admin)) {
-            newMember.roles.add(adminPL);
+        if (newMember.roles.cache.has(admin.plid)) {
+            newMember.roles.add(admin.id);
         }
-        if (newMember.roles.cache.has(own)) {
-            newMember.roles.add(ownPL);
+        if (newMember.roles.cache.has(owner.plid)) {
+            newMember.roles.add(owner.id);
         }
         return;
     }

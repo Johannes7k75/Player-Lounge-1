@@ -7,6 +7,10 @@ module.exports = async (client) => {
     require('../../commands/rr-claim/allRegeln')(client);
     require('../../commands/rr-claim/teamRegeln')(client);
     require('../../other/tickets')(client);
+    
+    for (let role of Object.keys(require('../../config/bot').role)) {
+        client.role[role] = require('../../config/bot').role[role]
+    }
 
     require('../../other/levels')(client);
     require('../../other/jointocreate')(client);

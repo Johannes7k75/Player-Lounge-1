@@ -44,20 +44,6 @@ module.exports = {
 			"rols": []
 		},
 		{
-			"name": "Minecraft User",
-			"fields": [
-				"Johannes7k75",
-				"Tobination14",
-				"me20",
-				"Lordalpha_",
-				"E_1lolix",
-				"E_Sushi",
-				"Kahrmii",
-				"\nE_The_Joker_7"
-			],
-			"rols": []
-		},
-		{
 			"name": "Windows cmd",
 			"fields": [
 				"sfc /SCANNOW - Only Administrator - Scannt den System Sactor auf Viren/Fehler ab"
@@ -67,6 +53,14 @@ module.exports = {
 		{
 			"name": "Windows PowerShell",
 			"fields": [],
+			"rols": []
+		},
+		{
+			"name": "windows",
+			"fields": [
+				"winget - package manager for windows, gives you the help menu",
+				"winget list - lists all packages from winget and ms.store"
+			],
 			"rols": []
 		}
 	]

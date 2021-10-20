@@ -66,7 +66,7 @@ module.exports = {
                 embed.addFields({ name: `${i + 1}. ${list_file.lists[i].name}`, value: `Einträge: \`${EinträgeLen}\`` }).setFooter('Wenn nicht mehr benötigt bitte 🗑️ klicken');
             }
             const filter = (reaction, user) => reaction.emoji.name === '🗑️' && user.bot != true; //;
-            const embedmessage = await message.channel.send(embed);
+            const embedmessage = await message.channel.send(embed).then((msg) => msg.delete({ timeout: list.countdown }));
             embedmessage.react('🗑️');
             embedmessage.awaitReactions(filter, { max: 1 }).then((collected) => collected.first().message.delete());
             return;
@@ -82,7 +82,7 @@ module.exports = {
             embed.setDescription(`\`\`\`${description.join('\n')}\`\`\``).setFooter('Wenn nicht mehr benötigt bitte 🗑️ klicken');
             const filter = (reaction, user) => reaction.emoji.name === '🗑️' && user.bot != true; //;
 
-            embedmessage = await message.channel.send(embed);
+            embedmessage = await message.channel.send(embed).then((msg) => msg.delete({ timeout: list.countdown }));
             embedmessage.react('🗑️');
             embedmessage.awaitReactions(filter, { max: 1 }).then((collected) => collected.first().message.delete());
 
@@ -100,7 +100,7 @@ module.exports = {
                 embed.setDescription(`${description.join(', ')}`).setFooter('Wenn nicht mehr benötigt bitte 🗑️ klicken')
                 const filter = (reaction, user) => reaction.emoji.name === '🗑️' && user.bot != true; //;
 
-                embedmessage = await message.channel.send(embed);
+                embedmessage = await message.channel.send(embed).then((msg) => msg.delete({ timeout: list.countdown }));
                 embedmessage.react('🗑️');
                 embedmessage.awaitReactions(filter, { max: 1 }).then((collected) => collected.first().message.delete());
 

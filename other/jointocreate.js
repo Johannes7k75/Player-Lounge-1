@@ -105,31 +105,39 @@ module.exports = function (client) {
     async function jointocreatechannel(user) {
         //user.member.user.send("This can be used to message the member that a new room was created")
 
-        const ccFile = require('./cc.json');
-        let userCC;
-        ccFile.forEach((x) => {
-            x.userid === user.member.id;
-            userCC = ccFile.indexOf(x) || undefined;
-        });
-        if (userCC === undefined) {
-            console.log(undefined);
-            ccFile.push({
-                userid: user.id,
-                settings: {
-                    name: `${user.member.user.username}'s Lounge`,
-                    maxuser: 0,
-                    hidden: false,
-                    banned: [],
-                },
-            });
-            let data = JSON.stringify(ccFile, null, '\t');
-            require('fs').writeFileSync('./other/cc.json', data);
-        }
+        let ccFile = require('./cc.json');
+        let userCC = getUserCC(ccFile, user);
+        console.log(user.id);
+        let perms = [];
 
+        // if (userCC === undefined) {
+        //     ccFile.push({
+        //         userid: user.id,
+        //         settings: {
+        //             name: `${user.member.user.username}'s Lounge`,
+        //             maxuser: '0',
+        //             hidden: false,
+        //             banned: [],
+        //         },
+        //     });
+        //     let data = JSON.stringify(ccFile, null, '\t');
+        //     require('fs').writeFileSync('./other/cc.json', data);
+        // }
+
+        let userEveryone = user.guild.roles.cache.get('765985461096677457');
+        userCC = getUserCC(ccFile, user);
+
+        if (ccFile[userCC].settings.hidden) {
+            perms.push({ id: user.id, allow: ['MANAGE_CHANNELS'] }, { id: userEveryone.id, deny: ['VIEW_CHANNEL'] });
+        } else {
+            perms.push({ id: user.id, allow: ['MANAGE_CHANNELS'] }, { id: userEveryone.id, allow: ['VIEW_CHANNEL'] });
+        }
+        console.log(perms);
         await user.guild.channels
             .create(ccFile[userCC].settings.name, {
                 type: 'voice',
                 parent: client.guilds.cache.get(config.discord.guildid).channels.cache.get(config.discord.JOINTOCREATECHANNEL).parent.id, //or set it as a category id
+                permissionOverwrites: perms,
             })
             .then(async (vc) => {
                 //move user to the new channel
@@ -138,29 +146,9 @@ module.exports = function (client) {
                 //set the new channel to the map
                 jointocreatemap.set(`tempvoicechannel_${vc.guild.id}_${vc.id}`, vc.id);
                 //change the permissions of the channel
-                await vc.overwritePermissions([
-                    {
-                        id: user.id,
-                        allow: ['MANAGE_CHANNELS'],
-                    },
-                    {
-                        id: user.guild.id,
-                        allow: ['VIEW_CHANNEL'],
-                    },
-                ]);
 
                 if (ccFile[userCC].settings.maxuser > 0) {
-                    console.log('Set user to', ccFile[userCC].settings.maxuser);
-                    await vc.setUserLimit(ccFile[userCC].settings.maxuser).then((vc) => console.log(`Set user limit to ${vc.userLimit} for ${vc.name}`));
-                }
-
-                if (ccFile[userCC].settings.hidden === true) {
-                    await vc.overwritePermissions([
-                        {
-                            id: user.guild.roles.everyone,
-                            deny: ['VIEW_CHANNEL'],
-                        },
-                    ]);
+                    await vc.setUserLimit(Number(ccFile[userCC].settings.maxuser)).then((vc) => vc.member);
                 }
 
                 if (ccFile[userCC].settings.banned.length > 0) {
@@ -177,3 +165,27 @@ module.exports = function (client) {
             });
     }
 };
+function getUserCC(ccFile, user) {
+    let userCC;
+    ccFile.forEach((x) => {
+        if (x.userid === user.member.id) {
+            userCC = ccFile.indexOf(x);
+        } else {
+            userCC = undefined;
+            if (userCC === undefined) {
+                ccFile.push({
+                    userid: user.id,
+                    settings: {
+                        name: `${user.member.user.username}'s Lounge`,
+                        maxuser: '0',
+                        hidden: false,
+                        banned: [],
+                    },
+                });
+                let data = JSON.stringify(ccFile, null, '\t');
+                require('fs').writeFileSync('./other/cc.json', data);
+            }
+        }
+    });
+    return userCC;
+}

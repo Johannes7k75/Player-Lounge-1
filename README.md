@@ -7,7 +7,7 @@ config:
 ```
 module.exports = {
     discord: {
-		token: 'BOT Token',
+	token: 'BOT Token',
         prefix: '!',
         activity: 'https://player-lounge.de',
         reactionchannel: '685180105110454337',
